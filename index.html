@@ -99,17 +99,24 @@
                         </div>
                     </div>
 
-                    <!-- Insights Dropdown -->
+                    <!-- Tools Dropdown -->
                     <div class="relative group">
                         <button class="flex items-center space-x-1 text-white/90 font-medium hover:text-white py-2 transition-colors">
-                            <span>Insights</span>
+                            <span>Tools</span>
                             <i class="fa-solid fa-chevron-down text-xs transition-transform group-hover:rotate-180"></i>
                         </button>
-                        <div class="absolute top-full left-0 w-56 bg-white text-gray-800 shadow-xl rounded-xl py-3 border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
-                            <a href="#case-studies" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary">Case Studies</a>
-                            <a href="#news" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary">Latest Articles</a>
+                        <div class="absolute top-full left-0 w-80 bg-white text-gray-800 shadow-xl rounded-xl py-3 border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                            <a href="#tools-section" onclick="switchTool('raf')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary font-medium">Interactive Medicare HCC RAF Calculator</a>
+                            <a href="#tools-section" onclick="switchTool('em')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary font-medium">E/M Utilization Benchmarking Tool</a>
+                            <a href="#tools-section" onclick="switchTool('icd')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary font-medium">ICD-10 ➜ CMS_HCC & HHS_HCC Lookup</a>
+                            <a href="#tools-section" onclick="switchTool('denial')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary font-medium">Claim Denial & Financial Loss Calculator</a>
+                            <a href="#tools-section" onclick="switchTool('cdi')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary font-medium">Clinical Documentation (CDI) ROI Estimator</a>
+                            <a href="#tools-section" onclick="switchTool('rcm')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary font-medium">RCM Outsourcing Cost vs In-House Savings</a>
+                            <a href="#tools-section" onclick="switchTool('ar')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary font-medium">AR Days & Cash Flow Acceleration</a>
                         </div>
                     </div>
+
+                    <!-- Insights Dropdown -->
 
                     <!-- Connect Dropdown -->
                     <div class="relative group">
@@ -192,7 +199,19 @@
                 <a href="#compliance" class="block py-1 text-gray-700 hover:text-primary">Compliance & Security</a>
             </div>
             <div class="space-y-2">
-                <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Insights</p>
+                <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Tools</p>
+            <div class="pl-2 space-y-1.5 border-l-2 border-gray-100">
+                <a href="#tools-section" onclick="switchTool('raf')" class="block py-1 text-sm text-gray-700 hover:text-primary">Medicare HCC RAF Calculator</a>
+                <a href="#tools-section" onclick="switchTool('em')" class="block py-0.5 text-sm text-gray-700 hover:text-primary">E/M Utilization Benchmarking Tool</a>
+                <a href="#tools-section" onclick="switchTool('icd')" class="block py-0.5 text-sm text-gray-700 hover:text-primary">ICD-10 to HCC Lookup</a>
+                <a href="#tools-section" onclick="switchTool('denial')" class="block py-0.5 text-sm text-gray-700 hover:text-primary">Claim Denial & Financial Loss Calculator</a>
+                <a href="#tools-section" onclick="switchTool('cdi')" class="block py-0.5 text-sm text-gray-700 hover:text-primary">CDI Query ROI Estimator</a>
+                <a href="#tools-section" onclick="switchTool('rcm')" class="block py-0.5 text-sm text-gray-700 hover:text-primary">RCM Outsourcing Cost vs In-House Savings</a>
+                <a href="#tools-section" onclick="switchTool('ar')" class="block py-0.5 text-sm text-gray-700 hover:text-primary">AR Days & Cash Flow Acceleration</a>
+            </div>
+        </div>
+        <div class="space-y-2">
+            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Insights</p>
                 <a href="#case-studies" class="block py-1 text-gray-700 hover:text-primary">Case Studies</a>
                 <a href="#news" class="block py-1 text-gray-700 hover:text-primary">Latest Articles</a>
             </div>
@@ -530,6 +549,482 @@
                                 <span>Connect on LinkedIn</span>
                             </a>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Interactive Tools Section -->
+    <section id="tools-section" class="py-24 bg-white transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <span class="text-xs font-bold uppercase tracking-widest text-gray-600">Clinical & Revenue Intelligence</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
+                    Interactive Healthcare Tools & Calculators
+                </h2>
+                <p class="text-gray-600 text-lg">
+                    Explore our suite of live calculators and benchmarking tools designed for healthcare providers, coders, and risk adjustment specialists.
+                </p>
+            </div>
+
+            <!-- Tool Tabs / Navigation (Flat) -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button onclick="switchTool('raf')" id="tab-raf" class="px-4 py-3 rounded-2xl font-semibold text-sm transition-all hero-theme-bg text-white shadow-md">
+                    <i class="fa-solid fa-calculator mr-2"></i> HCC RAF Calculator
+                </button>
+                <button onclick="switchTool('em')" id="tab-em" class="px-4 py-3 rounded-2xl font-semibold text-sm transition-all bg-gray-100 text-gray-700 hover:bg-gray-200">
+                    <i class="fa-solid fa-chart-column mr-2"></i> E/M Benchmarking
+                </button>
+                <button onclick="switchTool('icd')" id="tab-icd" class="px-4 py-3 rounded-2xl font-semibold text-sm transition-all bg-gray-100 text-gray-700 hover:bg-gray-200">
+                    <i class="fa-solid fa-magnifying-glass mr-2"></i> ICD-10 ➜ HCC Lookup
+                </button>
+                <button onclick="switchTool('denial')" id="tab-denial" class="px-4 py-3 rounded-2xl font-semibold text-sm transition-all bg-gray-100 text-gray-700 hover:bg-gray-200">
+                    <i class="fa-solid fa-triangle-exclamation mr-2"></i> Denial Impact
+                </button>
+                <button onclick="switchTool('cdi')" id="tab-cdi" class="px-4 py-3 rounded-2xl font-semibold text-sm transition-all bg-gray-100 text-gray-700 hover:bg-gray-200">
+                    <i class="fa-solid fa-file-invoice-dollar mr-2"></i> CDI ROI
+                </button>
+                <button onclick="switchTool('rcm')" id="tab-rcm" class="px-4 py-3 rounded-2xl font-semibold text-sm transition-all bg-gray-100 text-gray-700 hover:bg-gray-200">
+                    <i class="fa-solid fa-piggy-bank mr-2"></i> RCM Savings
+                </button>
+                <button onclick="switchTool('ar')" id="tab-ar" class="px-4 py-3 rounded-2xl font-semibold text-sm transition-all bg-gray-100 text-gray-700 hover:bg-gray-200">
+                    <i class="fa-solid fa-clock-rotate-left mr-2"></i> AR & Cash Flow
+                </button>
+            </div>
+            
+            <!-- Tool 1: Interactive Medicare HCC RAF Calculator -->
+            <div id="panel-raf" class="tool-panel section-theme-bg rounded-3xl p-8 sm:p-12 shadow-sm border border-gray-100">
+                <div id="hcc-calculator" class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <div class="lg:col-span-7 space-y-6">
+                        <div>
+                            <span class="px-3 py-1 rounded-full bg-white/70 text-gray-900 text-xs font-bold uppercase tracking-wider">Risk Adjustment</span>
+                            <h3 class="text-2xl font-bold text-gray-900 mt-2">Interactive Medicare HCC RAF Calculator</h3>
+                            <p class="text-gray-700 text-sm mt-1">Select patient demographic factors and chronic conditions to instantly calculate estimated Risk Adjustment Factor (RAF) score and projected Medicare reimbursement.</p>
+                        </div>
+                        
+                        <div class="space-y-4 bg-white/80 p-6 rounded-2xl backdrop-blur-sm">
+                            <h4 class="font-bold text-gray-900 text-sm uppercase tracking-wider">1. Patient Demographics</h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Age Bracket</label>
+                                    <select id="raf-age" onchange="calculateRaf()" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                        <option value="0.300">65-69 Years (Community)</option>
+                                        <option value="0.450" selected>70-74 Years (Community)</option>
+                                        <option value="0.600">75-79 Years (Community)</option>
+                                        <option value="0.750">80-84 Years (Community)</option>
+                                        <option value="0.950">85+ Years (Community)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Medicaid Dual Status</label>
+                                    <select id="raf-dual" onchange="calculateRaf()" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                        <option value="0.000">Non-Dual / Medicare Only</option>
+                                        <option value="0.125" selected>Full Dual Eligible (Aged)</option>
+                                        <option value="0.080">Partial Dual Eligible</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Original Medicare Reason</label>
+                                    <select id="raf-orig" onchange="calculateRaf()" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                        <option value="0.000" selected>Aged (65+)</option>
+                                        <option value="0.250">Disabled (Under 65)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Institutional Status</label>
+                                    <select id="raf-inst" onchange="calculateRaf()" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                        <option value="0.000" selected>Community / Non-Institutional</option>
+                                        <option value="0.350">Institutional (LTC / Nursing Facility)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 bg-white/80 p-6 rounded-2xl backdrop-blur-sm">
+                            <h4 class="font-bold text-gray-900 text-sm uppercase tracking-wider">2. Select Chronic Conditions (HCCs)</h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-56 overflow-y-auto pr-2">
+                                <label class="flex items-center space-x-3 p-2 rounded-xl hover:bg-white cursor-pointer transition-colors">
+                                    <input type="checkbox" value="0.306" data-name="Diabetes w/ Chronic Complications (HCC 18)" onchange="calculateRaf()" class="raf-condition w-4 h-4 text-primary rounded border-gray-300">
+                                    <span class="text-xs text-gray-800 font-medium">Diabetes w/ Complications (HCC 18) [0.306]</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-2 rounded-xl hover:bg-white cursor-pointer transition-colors">
+                                    <input type="checkbox" value="0.104" data-name="Diabetes w/o Complication (HCC 19)" onchange="calculateRaf()" class="raf-condition w-4 h-4 text-primary rounded border-gray-300">
+                                    <span class="text-xs text-gray-800 font-medium">Diabetes w/o Complication (HCC 19) [0.104]</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-2 rounded-xl hover:bg-white cursor-pointer transition-colors">
+                                    <input type="checkbox" value="0.344" data-name="Morbid Obesity (HCC 22)" onchange="calculateRaf()" class="raf-condition w-4 h-4 text-primary rounded border-gray-300">
+                                    <span class="text-xs text-gray-800 font-medium">Morbid Obesity (HCC 22) [0.344]</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-2 rounded-xl hover:bg-white cursor-pointer transition-colors">
+                                    <input type="checkbox" value="0.320" data-name="Specified Heart Arrhythmias (HCC 96)" onchange="calculateRaf()" class="raf-condition w-4 h-4 text-primary rounded border-gray-300">
+                                    <span class="text-xs text-gray-800 font-medium">Heart Arrhythmias (HCC 96) [0.320]</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-2 rounded-xl hover:bg-white cursor-pointer transition-colors">
+                                    <input type="checkbox" value="0.381" data-name="Congestive Heart Failure (HCC 85)" onchange="calculateRaf()" class="raf-condition w-4 h-4 text-primary rounded border-gray-300">
+                                    <span class="text-xs text-gray-800 font-medium">Congestive Heart Failure (HCC 85) [0.381]</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-2 rounded-xl hover:bg-white cursor-pointer transition-colors">
+                                    <input type="checkbox" value="0.272" data-name="Acute Myocardial Infarction (HCC 86)" onchange="calculateRaf()" class="raf-condition w-4 h-4 text-primary rounded border-gray-300">
+                                    <span class="text-xs text-gray-800 font-medium">Acute Myocardial Infarction (HCC 86) [0.272]</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-2 rounded-xl hover:bg-white cursor-pointer transition-colors">
+                                    <input type="checkbox" value="0.271" data-name="Chronic Obstructive Pulmonary Disease (HCC 111)" onchange="calculateRaf()" class="raf-condition w-4 h-4 text-primary rounded border-gray-300">
+                                    <span class="text-xs text-gray-800 font-medium">COPD (HCC 111) [0.271]</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-2 rounded-xl hover:bg-white cursor-pointer transition-colors">
+                                    <input type="checkbox" value="0.453" data-name="Vascular Disease (HCC 108)" onchange="calculateRaf()" class="raf-condition w-4 h-4 text-primary rounded border-gray-300">
+                                    <span class="text-xs text-gray-800 font-medium">Vascular Disease (HCC 108) [0.453]</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-2 rounded-xl hover:bg-white cursor-pointer transition-colors">
+                                    <input type="checkbox" value="0.388" data-name="Major Depressive / Bipolar Disorders (HCC 59)" onchange="calculateRaf()" class="raf-condition w-4 h-4 text-primary rounded border-gray-300">
+                                    <span class="text-xs text-gray-800 font-medium">Major Depression / Bipolar (HCC 59) [0.388]</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-2 rounded-xl hover:bg-white cursor-pointer transition-colors">
+                                    <input type="checkbox" value="0.256" data-name="Chronic Kidney Disease Stage 4 (HCC 136)" onchange="calculateRaf()" class="raf-condition w-4 h-4 text-primary rounded border-gray-300">
+                                    <span class="text-xs text-gray-800 font-medium">CKD Stage 4 (HCC 136) [0.256]</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 flex flex-col justify-between bg-white p-8 rounded-3xl shadow-md border border-gray-100 space-y-6">
+                        <div class="space-y-6">
+                            <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+                                <span class="font-bold text-gray-800 text-sm">Base Demographic Score</span>
+                                <span id="res-demo" class="font-extrabold text-gray-900 text-lg">0.575</span>
+                            </div>
+                            <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+                                <span class="font-bold text-gray-800 text-sm">Selected Conditions Score</span>
+                                <span id="res-hcc" class="font-extrabold text-gray-900 text-lg">0.000</span>
+                            </div>
+                            <div class="p-6 rounded-2xl hero-theme-bg text-white text-center space-y-2 shadow-lg">
+                                <span class="text-xs uppercase tracking-wider text-white/80 font-semibold">Total Estimated RAF Score</span>
+                                <div id="res-total" class="text-4xl font-black">0.575</div>
+                                <p class="text-xs text-white/80 pt-1">Projected Annual Medicare Capitation: <strong id="res-rev" class="text-white">$6,890</strong></p>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <p class="text-[11px] text-gray-500 text-center">Calculated using CMS V28/V24 Risk Adjustment Model parameters and national average base rate (~$1,000/mo).</p>
+                            <button onclick="alert('RAF Summary report generated successfully! Integration ready for EHR export.')" class="w-full py-3 rounded-xl bg-gray-900 text-white font-semibold text-sm shadow-md hover:bg-gray-800 transition-all">Export Patient RAF Report</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tool 2: E/M Utilization Benchmarking Tool -->
+            <div id="panel-em" class="tool-panel hidden section-theme-bg rounded-3xl p-8 sm:p-12 shadow-sm border border-gray-100">
+                <div id="em-benchmarking" class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <div class="lg:col-span-7 space-y-6">
+                        <div>
+                            <span class="px-3 py-1 rounded-full bg-white/70 text-gray-900 text-xs font-bold uppercase tracking-wider">Compliance & Billing</span>
+                            <h3 class="text-2xl font-bold text-gray-900 mt-2">E/M Utilization Benchmarking Tool</h3>
+                            <p class="text-gray-700 text-sm mt-1">Compare your outpatient Evaluation and Management (99211–99215) billing distribution against national specialty benchmarks to mitigate audit risk.</p>
+                        </div>
+
+                        <div class="space-y-4 bg-white/80 p-6 rounded-2xl backdrop-blur-sm">
+                            <h4 class="font-bold text-gray-900 text-sm uppercase tracking-wider">Enter Your Practice Visit Counts (Outpatient Est/Established)</h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Level 1 (99211)</label>
+                                    <input type="number" id="em-l1" value="15" oninput="calculateEm()" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Level 2 (99212)</label>
+                                    <input type="number" id="em-l2" value="45" oninput="calculateEm()" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Level 3 (99213)</label>
+                                    <input type="number" id="em-l3" value="180" oninput="calculateEm()" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Level 4 (99214)</label>
+                                    <input type="number" id="em-l4" value="220" oninput="calculateEm()" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Level 5 (99215)</label>
+                                    <input type="number" id="em-l5" value="40" oninput="calculateEm()" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 flex flex-col justify-between bg-white p-8 rounded-3xl shadow-md border border-gray-100 space-y-6">
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-gray-900 text-base">Benchmark Comparison (% of Total)</h4>
+                            <div class="space-y-3 text-sm">
+                                <div>
+                                    <div class="flex justify-between font-medium mb-1">
+                                        <span>Level 4 & 5 Combined</span>
+                                        <span id="bench-high" class="font-bold text-primary">52.0% (National Avg: 45%)</span>
+                                    </div>
+                                    <div class="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
+                                        <div id="bar-high" class="h-full hero-theme-bg transition-all duration-300" style="width: 52%"></div>
+                                    </div>
+                                </div>
+                                <div class="pt-2 text-xs text-gray-600 space-y-1.5 bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <p><strong>Audit Risk Assessment:</strong> <span id="audit-status" class="text-amber-600 font-semibold">Moderate Outlier (High Level 4/5 Utilization)</span></p>
+                                    <p id="audit-tip">Recommendation: Ensure clinical documentation supports medical necessity and MDM/time requirements for 99214 and 99215 encounters.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="alert('E/M Benchmarking audit report downloaded successfully.')" class="w-full py-3 rounded-xl hero-theme-bg text-white font-semibold text-sm shadow-md hover:opacity-95 transition-all">Download Audit Risk Report</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tool 3: ICD-10 to CMS_HCC & HHS_HCC Lookup Tool -->
+            <div id="panel-icd" class="tool-panel hidden section-theme-bg rounded-3xl p-8 sm:p-12 shadow-sm border border-gray-100">
+                <div id="icd-lookup" class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <div class="lg:col-span-7 space-y-6">
+                        <div>
+                            <span class="px-3 py-1 rounded-full bg-white/70 text-gray-900 text-xs font-bold uppercase tracking-wider">Crosswalk Directory</span>
+                            <h3 class="text-2xl font-bold text-gray-900 mt-2">ICD-10 ➜ CMS_HCC & HHS_HCC Lookup Tool</h3>
+                            <p class="text-gray-700 text-sm mt-1">Quickly search ICD-10 diagnosis codes to map corresponding Medicare (CMS-HCC V28) and Commercial/ACA (HHS-HCC) risk adjustment categories.</p>
+                        </div>
+
+                        <div class="space-y-4 bg-white/80 p-6 rounded-2xl backdrop-blur-sm">
+                            <label class="block text-xs font-medium text-gray-700 mb-1">Search ICD-10 Code or Clinical Description</label>
+                            <div class="flex space-x-2">
+                                <input type="text" id="icd-query" placeholder="e.g. E11.9, Diabetes, I10, Hypertension..." oninput="searchIcd()" class="flex-1 px-4 py-3 rounded-xl border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                <button onclick="searchIcd()" class="px-6 py-3 rounded-xl hero-theme-bg text-white font-semibold text-sm shadow-md">Search</button>
+                            </div>
+                            <div class="flex flex-wrap gap-2 pt-2">
+                                <span onclick="quickSearch('E11.9')" class="px-3 py-1 rounded-lg bg-white border border-gray-200 text-xs font-medium cursor-pointer hover:bg-gray-50">E11.9 (Type 2 Diabetes)</span>
+                                <span onclick="quickSearch('I10')" class="px-3 py-1 rounded-lg bg-white border border-gray-200 text-xs font-medium cursor-pointer hover:bg-gray-50">I10 (Hypertension)</span>
+                                <span onclick="quickSearch('J44.9')" class="px-3 py-1 rounded-lg bg-white border border-gray-200 text-xs font-medium cursor-pointer hover:bg-gray-50">J44.9 (COPD)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 flex flex-col justify-between bg-white p-8 rounded-3xl shadow-md border border-gray-100 space-y-6">
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-gray-900 text-sm uppercase tracking-wider">Mapping Results</h4>
+                            <div id="icd-results" class="space-y-3">
+                                <div class="p-4 rounded-xl bg-gray-50 border border-gray-100 space-y-2">
+                                    <div class="flex justify-between items-center">
+                                        <strong id="res-code" class="text-primary text-base">E11.9</strong>
+                                        <span id="res-status" class="px-2 py-0.5 rounded bg-green-100 text-green-800 text-[10px] font-bold">MAPPED</span>
+                                    </div>
+                                    <p id="res-desc" class="text-xs text-gray-700 font-medium">Type 2 diabetes mellitus without complications</p>
+                                    <div class="grid grid-cols-2 gap-2 pt-2 border-t border-gray-200 text-xs">
+                                        <div><span class="text-gray-500 block">CMS-HCC (V28):</span> <strong id="res-cms" class="text-gray-900">HCC 19 (Risk Wt: 0.104)</strong></div>
+                                        <div><span class="text-gray-500 block">HHS-HCC (ACA):</span> <strong id="res-hhs" class="text-gray-900">HCC 37 (Risk Wt: 0.142)</strong></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-[11px] text-gray-500 text-center">Updated with latest annual CMS and HHS risk adjustment model revisions and coefficient updates.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tool 4: Claim Denial Rate & Revenue Loss Calculator -->
+            <div id="panel-denial" class="tool-panel hidden section-theme-bg rounded-3xl p-8 sm:p-12 shadow-sm border border-gray-100">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <div class="lg:col-span-7 space-y-6">
+                        <div>
+                            <span class="px-3 py-1 rounded-full bg-white/70 text-gray-900 text-xs font-bold uppercase tracking-wider">Revenue Cycle Optimization</span>
+                            <h3 class="text-2xl font-bold text-gray-900 mt-2">Claim Denial Rate & Financial Loss Calculator</h3>
+                            <p class="text-gray-700 text-sm mt-1">Calculate annual revenue loss due to claim denials and estimate financial recovery potential through AI-powered appeals and automated scrubber rules.</p>
+                        </div>
+
+                        <div class="space-y-4 bg-white/80 p-6 rounded-2xl backdrop-blur-sm">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Total Annual Claims Submitted</label>
+                                    <input type="number" id="denial-claims" value="50000" oninput="calculateDenials()" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Average Claim Reimbursement ($)</label>
+                                    <input type="number" id="denial-avg" value="350" oninput="calculateDenials()" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Current Claim Denial Rate (%)</label>
+                                    <input type="range" id="denial-rate" min="2" max="25" step="0.5" value="9.5" oninput="calculateDenials()" class="w-full accent-primary">
+                                    <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                        <span>2% (Best Practice)</span>
+                                        <span id="denial-rate-val" class="font-bold text-primary">9.5%</span>
+                                        <span>25% (High Risk)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 flex flex-col justify-between bg-white p-8 rounded-3xl shadow-md border border-gray-100 space-y-6">
+                        <div class="space-y-6">
+                            <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+                                <span class="font-bold text-gray-800 text-sm">Total Denied Claims</span>
+                                <span id="res-denied-count" class="font-extrabold text-red-600 text-lg">4,750</span>
+                            </div>
+                            <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+                                <span class="font-bold text-gray-800 text-sm">Annual Revenue Lost</span>
+                                <span id="res-denied-loss" class="font-extrabold text-red-600 text-lg">$1,662,500</span>
+                            </div>
+                            <div class="p-6 rounded-2xl hero-theme-bg text-white text-center space-y-2 shadow-lg">
+                                <span class="text-xs uppercase tracking-wider text-white/80 font-semibold">AI Recovery Potential (65%)</span>
+                                <div id="res-denied-recovery" class="text-3xl font-black">$1,080,625</div>
+                                <p class="text-xs text-white/80 pt-1">Recovered annually with New Company RCM automation</p>
+                            </div>
+                        </div>
+                        <button onclick="alert('Denial analysis report ready for download.')" class="w-full py-3 rounded-xl bg-gray-900 text-white font-semibold text-sm shadow-md hover:bg-gray-800 transition-all">Download Denial Recovery Plan</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tool 5: CDI Query ROI Estimator -->
+            <div id="panel-cdi" class="tool-panel hidden section-theme-bg rounded-3xl p-8 sm:p-12 shadow-sm border border-gray-100">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <div class="lg:col-span-7 space-y-6">
+                        <div>
+                            <span class="px-3 py-1 rounded-full bg-white/70 text-gray-900 text-xs font-bold uppercase tracking-wider">Clinical Documentation</span>
+                            <h3 class="text-2xl font-bold text-gray-900 mt-2">Clinical Documentation Integrity (CDI) ROI Estimator</h3>
+                            <p class="text-gray-700 text-sm mt-1">Estimate the financial and quality impact of automated clinical documentation queries on Case Mix Index (CMI) and inpatient reimbursement.</p>
+                        </div>
+
+                        <div class="space-y-4 bg-white/80 p-6 rounded-2xl backdrop-blur-sm">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Annual Inpatient Discharges</label>
+                                    <input type="number" id="cdi-discharges" value="12000" oninput="calculateCdi()" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Current Case Mix Index (CMI)</label>
+                                    <input type="number" id="cdi-cmi" value="1.65" step="0.05" oninput="calculateCdi()" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Average Base Medicare Rate per Discharge ($)</label>
+                                    <input type="number" id="cdi-baserate" value="6500" oninput="calculateCdi()" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 flex flex-col justify-between bg-white p-8 rounded-3xl shadow-md border border-gray-100 space-y-6">
+                        <div class="space-y-6">
+                            <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+                                <span class="font-bold text-gray-800 text-sm">Estimated CMI Lift (+0.08)</span>
+                                <span id="res-cmi-lift" class="font-extrabold text-primary text-lg">1.73</span>
+                            </div>
+                            <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+                                <span class="font-bold text-gray-800 text-sm">Revenue Gain per Discharge</span>
+                                <span id="res-gain-per" class="font-extrabold text-gray-900 text-lg">$520</span>
+                            </div>
+                            <div class="p-6 rounded-2xl hero-theme-bg text-white text-center space-y-2 shadow-lg">
+                                <span class="text-xs uppercase tracking-wider text-white/80 font-semibold">Total Projected Annual CDI Revenue Gain</span>
+                                <div id="res-cdi-total" class="text-3xl font-black">$6,240,000</div>
+                                <p class="text-xs text-white/80 pt-1">Driven by AI-assisted physician query generation & specificity</p>
+                            </div>
+                        </div>
+                        <button onclick="alert('CDI ROI feasibility proposal downloaded.')" class="w-full py-3 rounded-xl hero-theme-bg text-white font-semibold text-sm shadow-md hover:opacity-95 transition-all">Download CDI Business Case</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tool 6: RCM Outsourcing Cost vs In-House Savings Calculator -->
+            <div id="panel-rcm" class="tool-panel hidden section-theme-bg rounded-3xl p-8 sm:p-12 shadow-sm border border-gray-100">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <div class="lg:col-span-7 space-y-6">
+                        <div>
+                            <span class="px-3 py-1 rounded-full bg-white/70 text-gray-900 text-xs font-bold uppercase tracking-wider">Business Intelligence</span>
+                            <h3 class="text-2xl font-bold text-gray-900 mt-2">RCM Outsourcing Cost vs. In-House Savings Calculator</h3>
+                            <p class="text-gray-700 text-sm mt-1">Compare the overhead costs of managing billing, coding, and collections in-house against New Company's automated RCM services.</p>
+                        </div>
+
+                        <div class="space-y-4 bg-white/80 p-6 rounded-2xl backdrop-blur-sm">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Monthly Billing Staff Headcount</label>
+                                    <input type="number" id="rcm-staff" value="8" oninput="calculateRcm()" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Avg. Annual Salary + Benefits ($)</label>
+                                    <input type="number" id="rcm-salary" value="65000" oninput="calculateRcm()" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Total Monthly Collections ($)</label>
+                                    <input type="number" id="rcm-collections" value="750000" oninput="calculateRcm()" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">New Company Fee Rate (%)</label>
+                                    <input type="number" id="rcm-rate" value="4.5" step="0.1" oninput="calculateRcm()" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 flex flex-col justify-between bg-white p-8 rounded-3xl shadow-md border border-gray-100 space-y-6">
+                        <div class="space-y-6">
+                            <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+                                <span class="font-bold text-gray-800 text-sm">Current In-House Annual Overhead</span>
+                                <span id="res-inhouse-cost" class="font-extrabold text-red-600 text-lg">$520,000</span>
+                            </div>
+                            <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+                                <span class="font-bold text-gray-800 text-sm">New Company Annual Service Fee</span>
+                                <span id="res-outsourced-cost" class="font-extrabold text-gray-900 text-lg">$405,000</span>
+                            </div>
+                            <div class="p-6 rounded-2xl hero-theme-bg text-white text-center space-y-2 shadow-lg">
+                                <span class="text-xs uppercase tracking-wider text-white/80 font-semibold">Net Annual Operational Savings</span>
+                                <div id="res-net-savings" class="text-3xl font-black">$115,000</div>
+                                <p class="text-xs text-white/80 pt-1">Plus 15% average increase in net collection rate</p>
+                            </div>
+                        </div>
+                        <button onclick="alert('RCM financial comparison report downloaded.')" class="w-full py-3 rounded-xl hero-theme-bg text-white font-semibold text-sm shadow-md hover:opacity-95 transition-all">Download Business Case</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tool 7: AR Days & Cash Flow Acceleration Calculator -->
+            <div id="panel-ar" class="tool-panel hidden section-theme-bg rounded-3xl p-8 sm:p-12 shadow-sm border border-gray-100">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <div class="lg:col-span-7 space-y-6">
+                        <div>
+                            <span class="px-3 py-1 rounded-full bg-white/70 text-gray-900 text-xs font-bold uppercase tracking-wider">Cash Flow Optimization</span>
+                            <h3 class="text-2xl font-bold text-gray-900 mt-2">AR Days & Cash Flow Acceleration Calculator</h3>
+                            <p class="text-gray-700 text-sm mt-1">Estimate the working capital unlocked by reducing your Days in Accounts Receivable (AR) through automated clearinghouse scrubbers and digital patient statements.</p>
+                        </div>
+
+                        <div class="space-y-4 bg-white/80 p-6 rounded-2xl backdrop-blur-sm">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Average Daily Revenue ($)</label>
+                                    <input type="number" id="ar-daily" value="25000" oninput="calculateAr()" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Current AR Days</label>
+                                    <input type="number" id="ar-days" value="58" oninput="calculateAr()" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Target AR Days with Automation</label>
+                                    <input type="range" id="ar-target" min="25" max="55" step="1" value="38" oninput="calculateAr()" class="w-full accent-primary">
+                                    <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                        <span>25 Days (Best Practice)</span>
+                                        <span id="ar-target-val" class="font-bold text-primary">38 Days</span>
+                                        <span>55 Days</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 flex flex-col justify-between bg-white p-8 rounded-3xl shadow-md border border-gray-100 space-y-6">
+                        <div class="space-y-6">
+                            <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+                                <span class="font-bold text-gray-800 text-sm">Current Total AR Outstanding</span>
+                                <span id="res-ar-current" class="font-extrabold text-gray-900 text-lg">$1,450,000</span>
+                            </div>
+                            <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+                                <span class="font-bold text-gray-800 text-sm">AR Days Reduction</span>
+                                <span id="res-ar-reduction" class="font-extrabold text-primary text-lg">20 Days</span>
+                            </div>
+                            <div class="p-6 rounded-2xl hero-theme-bg text-white text-center space-y-2 shadow-lg">
+                                <span class="text-xs uppercase tracking-wider text-white/80 font-semibold">Working Capital Unlocked</span>
+                                <div id="res-ar-unlocked" class="text-3xl font-black">$500,000</div>
+                                <p class="text-xs text-white/80 pt-1">Immediate cash flow liquidity added to balance sheet</p>
+                            </div>
+                        </div>
+                        <button onclick="alert('AR acceleration roadmap downloaded.')" class="w-full py-3 rounded-xl hero-theme-bg text-white font-semibold text-sm shadow-md hover:opacity-95 transition-all">Download AR Strategy Guide</button>
                     </div>
                 </div>
             </div>
@@ -1046,6 +1541,214 @@
             alert('Thank you for contacting New Company. Our healthcare team will reach out to you shortly.');
             event.target.reset();
         }
-    </script>
+    
+        // Tools Switcher Function
+        function switchTool(type) {
+            const panels = document.querySelectorAll('.tool-panel');
+            panels.forEach(p => p.classList.add('hidden'));
+
+            ['raf', 'em', 'icd', 'denial', 'cdi', 'rcm', 'ar'].forEach(t => {
+                const btn = document.getElementById('tab-' + t);
+                if (btn) {
+                    if (t === type) {
+                        btn.className = 'px-4 py-3 rounded-2xl font-semibold text-sm transition-all hero-theme-bg text-white shadow-md';
+                    } else {
+                        btn.className = 'px-4 py-3 rounded-2xl font-semibold text-sm transition-all bg-gray-100 text-gray-700 hover:bg-gray-200';
+                    }
+                }
+            });
+
+            const targetPanel = document.getElementById('panel-' + type);
+            if (targetPanel) {
+                targetPanel.classList.remove('hidden');
+            }
+        }
+
+        // Interactive RAF Calculator Logic
+        function calculateRaf() {
+            const ageVal = parseFloat(document.getElementById('raf-age').value) || 0;
+            const dualVal = parseFloat(document.getElementById('raf-dual').value) || 0;
+            const origVal = parseFloat(document.getElementById('raf-orig').value) || 0;
+            const instVal = parseFloat(document.getElementById('raf-inst').value) || 0;
+
+            const demoTotal = ageVal + dualVal + origVal + instVal;
+            document.getElementById('res-demo').textContent = demoTotal.toFixed(3);
+
+            let hccTotal = 0;
+            const checkboxes = document.querySelectorAll('.raf-condition');
+            checkboxes.forEach(cb => {
+                if (cb.checked) {
+                    hccTotal += parseFloat(cb.value);
+                }
+            });
+            document.getElementById('res-hcc').textContent = hccTotal.toFixed(3);
+
+            const totalRaf = demoTotal + hccTotal;
+            document.getElementById('res-total').textContent = totalRaf.toFixed(3);
+
+            // Projected annual capitation (~$1,000/month base * 12 * RAF)
+            const annualRev = Math.round(totalRaf * 1000 * 12);
+            document.getElementById('res-rev').textContent = '$' + annualRev.toLocaleString();
+        }
+
+        // E/M Benchmarking Logic
+        function calculateEm() {
+            const l1 = parseFloat(document.getElementById('em-l1').value) || 0;
+            const l2 = parseFloat(document.getElementById('em-l2').value) || 0;
+            const l3 = parseFloat(document.getElementById('em-l3').value) || 0;
+            const l4 = parseFloat(document.getElementById('em-l4').value) || 0;
+            const l5 = parseFloat(document.getElementById('em-l5').value) || 0;
+
+            const total = l1 + l2 + l3 + l4 + l5;
+            if (total === 0) return;
+
+            const highPct = ((l4 + l5) / total) * 100;
+            document.getElementById('bench-high').textContent = highPct.toFixed(1) + '% (National Avg: 45%)';
+            document.getElementById('bar-high').style.width = Math.min(highPct, 100) + '%';
+
+            const statusEl = document.getElementById('audit-status');
+            const tipEl = document.getElementById('audit-tip');
+
+            if (highPct > 60) {
+                statusEl.textContent = 'High Audit Risk (Significantly Above National Average)';
+                statusEl.className = 'text-red-600 font-semibold';
+                tipEl.textContent = 'Urgent: High concentration of Level 4 & 5 visits. Conduct internal coding audits and verify MDM documentation.';
+            } else if (highPct > 45) {
+                statusEl.textContent = 'Moderate Outlier (Above National Average)';
+                statusEl.className = 'text-amber-600 font-semibold';
+                tipEl.textContent = 'Recommendation: Ensure clinical documentation supports medical necessity and complexity for 99214 and 99215 encounters.';
+            } else {
+                statusEl.textContent = 'Low Risk (Within Normal Benchmarks)';
+                statusEl.className = 'text-green-600 font-semibold';
+                tipEl.textContent = 'Your outpatient E/M distribution aligns well with national specialty norms. Continue standard documentation reviews.';
+            }
+        }
+
+        // ICD-10 Search Logic
+        const icdDatabase = {
+            'e11.9': { code: 'E11.9', desc: 'Type 2 diabetes mellitus without complications', cms: 'HCC 19 (Risk Wt: 0.104)', hhs: 'HCC 37 (Risk Wt: 0.142)' },
+            'e11.69': { code: 'E11.69', desc: 'Type 2 diabetes mellitus with other specified complications', cms: 'HCC 18 (Risk Wt: 0.306)', hhs: 'HCC 35 (Risk Wt: 0.318)' },
+            'i10': { code: 'I10', desc: 'Essential (primary) hypertension', cms: 'Non-Specific / Non-Mapped to HCC', hhs: 'HCC 207 (Risk Wt: 0.084)' },
+            'j44.9': { code: 'J44.9', desc: 'Chronic obstructive pulmonary disease, unspecified', cms: 'HCC 111 (Risk Wt: 0.271)', hhs: 'HCC 157 (Risk Wt: 0.325)' },
+            'i50.9': { code: 'I50.9', desc: 'Heart failure, unspecified', cms: 'HCC 85 (Risk Wt: 0.381)', hhs: 'HCC 186 (Risk Wt: 0.420)' },
+            'e66.01': { code: 'E66.01', desc: 'Morbid (severe) obesity due to excess calories', cms: 'HCC 22 (Risk Wt: 0.344)', hhs: 'HCC 225 (Risk Wt: 0.198)' }
+        };
+
+        function quickSearch(code) {
+            document.getElementById('icd-query').value = code;
+            searchIcd();
+        }
+
+        function searchIcd() {
+            const query = document.getElementById('icd-query').value.trim().toLowerCase();
+            const resultsDiv = document.getElementById('icd-results');
+
+            if (!query) return;
+
+            let match = icdDatabase[query];
+            if (!match) {
+                // search partial or fallback
+                const foundKey = Object.keys(icdDatabase).find(k => k.includes(query) || icdDatabase[k].desc.toLowerCase().includes(query));
+                if (foundKey) {
+                    match = icdDatabase[foundKey];
+                }
+            }
+
+            if (match) {
+                resultsDiv.innerHTML = `
+                    <div class="p-4 rounded-xl bg-gray-50 border border-gray-100 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <strong class="text-primary text-base">${match.code}</strong>
+                            <span class="px-2 py-0.5 rounded bg-green-100 text-green-800 text-[10px] font-bold">MAPPED</span>
+                        </div>
+                        <p class="text-xs text-gray-700 font-medium">${match.desc}</p>
+                        <div class="grid grid-cols-2 gap-2 pt-2 border-t border-gray-200 text-xs">
+                            <div><span class="text-gray-500 block">CMS-HCC (V28):</span> <strong class="text-gray-900">${match.cms}</strong></div>
+                            <div><span class="text-gray-500 block">HHS-HCC (ACA):</span> <strong class="text-gray-900">${match.hhs}</strong></div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                resultsDiv.innerHTML = `
+                    <div class="p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-800 space-y-1">
+                        <strong>Code not found in quick demo directory.</strong>
+                        <p>Our full enterprise AI engine crosswalks over 70,000+ ICD-10 codes instantly against CMS and HHS risk models.</p>
+                    </div>
+                `;
+            }
+        }
+
+
+        // Denial Rate Calculator Logic
+        function calculateDenials() {
+            const claims = parseFloat(document.getElementById('denial-claims').value) || 0;
+            const avg = parseFloat(document.getElementById('denial-avg').value) || 0;
+            const rate = parseFloat(document.getElementById('denial-rate').value) || 0;
+
+            document.getElementById('denial-rate-val').textContent = rate.toFixed(1) + '%';
+
+            const deniedCount = Math.round(claims * (rate / 100));
+            const totalLoss = deniedCount * avg;
+            const recovery = totalLoss * 0.65;
+
+            document.getElementById('res-denied-count').textContent = deniedCount.toLocaleString();
+            document.getElementById('res-denied-loss').textContent = '$' + Math.round(totalLoss).toLocaleString();
+            document.getElementById('res-denied-recovery').textContent = '$' + Math.round(recovery).toLocaleString();
+        }
+
+        // CDI ROI Estimator Logic
+        function calculateCdi() {
+            const discharges = parseFloat(document.getElementById('cdi-discharges').value) || 0;
+            const cmi = parseFloat(document.getElementById('cdi-cmi').value) || 0;
+            const baseRate = parseFloat(document.getElementById('cdi-baserate').value) || 0;
+
+            const cmiLift = cmi + 0.08;
+            document.getElementById('res-cmi-lift').textContent = cmiLift.toFixed(2);
+
+            const gainPerDischarge = 0.08 * baseRate;
+            document.getElementById('res-gain-per').textContent = '$' + Math.round(gainPerDischarge).toLocaleString();
+
+            const totalGain = discharges * gainPerDischarge;
+            document.getElementById('res-cdi-total').textContent = '$' + Math.round(totalGain).toLocaleString();
+        }
+
+
+        // RCM Savings Calculator Logic
+        function calculateRcm() {
+            const staff = parseFloat(document.getElementById('rcm-staff').value) || 0;
+            const salary = parseFloat(document.getElementById('rcm-salary').value) || 0;
+            const collections = parseFloat(document.getElementById('rcm-collections').value) || 0;
+            const rate = parseFloat(document.getElementById('rcm-rate').value) || 0;
+
+            const inHouseCost = staff * salary;
+            const annualCollections = collections * 12;
+            const outsourcedCost = annualCollections * (rate / 100);
+            const netSavings = inHouseCost - outsourcedCost;
+
+            document.getElementById('res-inhouse-cost').textContent = '$' + Math.round(inHouseCost).toLocaleString();
+            document.getElementById('res-outsourced-cost').textContent = '$' + Math.round(outsourcedCost).toLocaleString();
+            
+            const savingsEl = document.getElementById('res-net-savings');
+            savingsEl.textContent = '$' + Math.round(Math.abs(netSavings)).toLocaleString();
+        }
+
+        // AR & Cash Flow Calculator Logic
+        function calculateAr() {
+            const daily = parseFloat(document.getElementById('ar-daily').value) || 0;
+            const currentDays = parseFloat(document.getElementById('ar-days').value) || 0;
+            const targetDays = parseFloat(document.getElementById('ar-target').value) || 0;
+
+            document.getElementById('ar-target-val').textContent = targetDays + ' Days';
+
+            const currentAr = daily * currentDays;
+            const daysReduced = Math.max(0, currentDays - targetDays);
+            const unlockedCapital = daily * daysReduced;
+
+            document.getElementById('res-ar-current').textContent = '$' + Math.round(currentAr).toLocaleString();
+            document.getElementById('res-ar-reduction').textContent = daysReduced + ' Days';
+            document.getElementById('res-ar-unlocked').textContent = '$' + Math.round(unlockedCapital).toLocaleString();
+        }
+
+</script>
 </body>
 </html>
