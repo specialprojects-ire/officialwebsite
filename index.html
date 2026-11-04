@@ -30,6 +30,19 @@
             --color-secondary: #9AD872;
             --color-accent: #FFA02E;
             --color-lightbg: #F4F9F2;
+            scrollbar-color: #9ca3af #f9fafb;
+            scrollbar-width: thin;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f9fafb;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #9ca3af;
+            border-radius: 9999px;
+            border: 2px solid #f9fafb;
         }
         .hero-theme-bg {
             background-color: var(--color-primary);
@@ -67,6 +80,43 @@
         .slide-animate {
             animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+        @keyframes heroTitleEnter {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+                filter: blur(3px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+        .hero-title-enter {
+            animation: heroTitleEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+        @keyframes heroTitleWordReveal {
+            from {
+                opacity: 0;
+                transform: translateY(0.45em);
+                filter: blur(4px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+        .hero-title-word {
+            display: inline-block;
+            animation: heroTitleWordReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .hero-title-enter,
+            .hero-title-word {
+                animation: none;
+            }
+        }
 
     
         /* Fade In / Fade Out Dropdown Menu Animations */
@@ -78,6 +128,17 @@
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .nav-menu::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            height: 20px;
+        }
+        .nav-menu > .dropdown-menu {
+            top: calc(100% + 20px);
         }
         
         /* Nav link hover underline effect */
@@ -98,6 +159,63 @@
             width: 100%;
         }
 
+        /* Shortened menu descriptions with custom tooltip */
+        .menu-item-copy {
+            position: relative;
+            display: block;
+            max-width: 180px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            transition: color 0.2s ease;
+        }
+        .spotlight-copy {
+            max-width: none;
+            width: 100%;
+            white-space: normal;
+            overflow: visible;
+        }
+        .spotlight-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .spotlight-badge {
+            align-self: flex-start;
+            margin-left: -0.625rem;
+            margin-right: auto;
+        }
+        .menu-item-copy:hover {
+            overflow: visible;
+            white-space: normal;
+            color: var(--color-primary);
+        }
+        .menu-item-copy::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            left: 0;
+            top: calc(100% + 8px);
+            z-index: 60;
+            max-width: 280px;
+            padding: 8px 10px;
+            border-radius: 10px;
+            background: rgba(17, 24, 39, 0.96);
+            color: #ffffff;
+            font-size: 11px;
+            line-height: 1.45;
+            letter-spacing: 0.01em;
+            white-space: normal;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.18);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(4px);
+            transition: opacity 0.18s ease, transform 0.18s ease;
+        }
+        .menu-item-copy:hover::after {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased">
@@ -113,7 +231,7 @@
                 <div class="flex items-center space-x-3">
                     <a href="#" class="flex items-center space-x-3 group">
                         <div class="w-11 h-11 rounded-2xl hero-theme-bg text-white flex items-center justify-center font-extrabold text-lg shadow-md group-hover:scale-105 transition-all relative border border-accent/30">
-                            <i class="fa-solid fa-brain-circuit text-accent text-sm"></i><span class="tracking-tighter text-white">S</span>
+                            <i class="fa-solid fa-brain-circuit text-accent text-sm"></i><span class="tracking-tighter text-white">SP</span>
                             <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-accent border-2 border-white"></span>
                         </div>
                         <div class="flex flex-col">
@@ -131,60 +249,89 @@
                 <!-- Desktop Navigation with Mega Menus featuring Multi-Column Cards & Feature Promo Box -->
                 <nav class="hidden lg:flex items-center space-x-8">
                     <!-- Company Mega Menu -->
-                    <div class="relative group">
+                    <div class="relative group nav-menu">
                         <button class="flex items-center space-x-1 text-gray-700 font-medium hover:text-primary py-2 transition-colors">
                             <span>Company</span>
-                            <i class="fa-solid fa-chevron-down text-xs transition-transform group-hover:rotate-180"></i>
+                            <i class="fa-solid fa-plus text-xs group-hover:hidden"></i>
+                            <i class="fa-solid fa-minus text-xs hidden group-hover:inline-block"></i>
                         </button>
                         <div class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 w-[850px] bg-white text-gray-800 shadow-2xl rounded-2xl p-6 border border-gray-100">
                             <div class="grid grid-cols-4 gap-6">
                                 <!-- Column 1 -->
-                                <div class="space-y-3">
+                                <div class="space-y-4">
                                     <h4 class="text-xs font-extrabold uppercase tracking-wider text-primary border-b border-gray-100 pb-2">About Us</h4>
-                                    <a href="#about" class="block p-2 rounded-xl hover:bg-gray-50 transition-colors group/card">
-                                        <div class="text-sm font-bold text-gray-900 group-hover/card:text-primary flex items-center gap-2"><i class="fa-solid fa-users text-primary"></i> Who We Are</div>
-                                        <div class="text-xs text-gray-500 mt-0.5">Our heritage and vision</div>
-                                    </a>
-                                    <a href="#about" class="block p-2 rounded-xl hover:bg-gray-50 transition-colors group/card">
-                                        <div class="text-sm font-bold text-gray-900 group-hover/card:text-primary flex items-center gap-2"><i class="fa-solid fa-building text-primary"></i> Corporate Overview</div>
-                                        <div class="text-xs text-gray-500 mt-0.5">Excellence in AI healthcare</div>
-                                    </a>
+                                    <div class="p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 group/card">
+                                        <a href="#about" class="block">
+                                            <div class="flex items-center space-x-3 mb-1">
+                                                <div class="w-8 h-8 rounded-lg hero-theme-bg text-white flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-users"></i></div>
+                                                <span class="text-sm font-bold text-gray-900 group-hover/card:text-primary">Who We Are</span>
+                                            </div>
+                                            <p class="menu-item-copy text-xs text-gray-600 pl-11 leading-relaxed" data-tooltip="Our heritage and vision.">Our heritage and vision...</p>
+                                        </a>
+                                    </div>
+                                    <div class="p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 group/card">
+                                        <a href="#about" class="block">
+                                            <div class="flex items-center space-x-3 mb-1">
+                                                <div class="w-8 h-8 rounded-lg hero-theme-bg text-white flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-building"></i></div>
+                                                <span class="text-sm font-bold text-gray-900 group-hover/card:text-primary">Corporate Overview</span>
+                                            </div>
+                                            <p class="menu-item-copy text-xs text-gray-600 pl-11 leading-relaxed" data-tooltip="Excellence in AI healthcare.">Excellence in AI healthcare...</p>
+                                        </a>
+                                    </div>
                                 </div>
                                 <!-- Column 2 -->
-                                <div class="space-y-3">
+                                <div class="space-y-4">
                                     <h4 class="text-xs font-extrabold uppercase tracking-wider text-primary border-b border-gray-100 pb-2">Trust & Delivery</h4>
-                                    <a href="#global-delivery" class="block p-2 rounded-xl hover:bg-gray-50 transition-colors group/card">
-                                        <div class="text-sm font-bold text-gray-900 group-hover/card:text-primary flex items-center gap-2"><i class="fa-solid fa-earth-americas text-primary"></i> Global Delivery Model</div>
-                                        <div class="text-xs text-gray-500 mt-0.5">24/7 US-India operational coverage</div>
-                                    </a>
-                                    <a href="#certified-coders" class="block p-2 rounded-xl hover:bg-gray-50 transition-colors group/card">
-                                        <div class="text-sm font-bold text-gray-900 group-hover/card:text-primary flex items-center gap-2"><i class="fa-solid fa-award text-primary"></i> Trust & Quality</div>
-                                        <div class="text-xs text-gray-500 mt-0.5">AAPC & AHIMA certified experts</div>
-                                    </a>
+                                    <div class="p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 group/card">
+                                        <a href="#global-delivery" class="block">
+                                            <div class="flex items-center space-x-3 mb-1">
+                                                <div class="w-8 h-8 rounded-lg hero-theme-bg text-white flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-earth-americas"></i></div>
+                                                <span class="text-sm font-bold text-gray-900 group-hover/card:text-primary">Global Delivery Model</span>
+                                            </div>
+                                            <p class="menu-item-copy text-xs text-gray-600 pl-11 leading-relaxed" data-tooltip="24/7 US-India operational coverage.">24/7 US-India operational coverage...</p>
+                                        </a>
+                                    </div>
+                                    <div class="p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 group/card">
+                                        <a href="#certified-coders" class="block">
+                                            <div class="flex items-center space-x-3 mb-1">
+                                                <div class="w-8 h-8 rounded-lg hero-theme-bg text-white flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-award"></i></div>
+                                                <span class="text-sm font-bold text-gray-900 group-hover/card:text-primary">Trust &amp; Quality</span>
+                                            </div>
+                                            <p class="menu-item-copy text-xs text-gray-600 pl-11 leading-relaxed" data-tooltip="AAPC &amp; AHIMA certified experts.">AAPC &amp; AHIMA certified experts...</p>
+                                        </a>
+                                    </div>
                                 </div>
                                 <!-- Column 3 -->
-                                <div class="space-y-3">
+                                <div class="space-y-4">
                                     <h4 class="text-xs font-extrabold uppercase tracking-wider text-primary border-b border-gray-100 pb-2">Leadership & News</h4>
-                                    <a href="#leadership" class="block p-2 rounded-xl hover:bg-gray-50 transition-colors group/card">
-                                        <div class="text-sm font-bold text-gray-900 group-hover/card:text-primary flex items-center gap-2"><i class="fa-solid fa-user-tie text-primary"></i> Leadership Team</div>
-                                        <div class="text-xs text-gray-500 mt-0.5">Executive pioneers and advisors</div>
-                                    </a>
-                                    <a href="#news" class="block p-2 rounded-xl hover:bg-gray-50 transition-colors group/card">
-                                        <div class="text-sm font-bold text-gray-900 group-hover/card:text-primary flex items-center gap-2"><i class="fa-solid fa-newspaper text-primary"></i> News Room</div>
-                                        <div class="text-xs text-gray-500 mt-0.5">Latest announcements & insights</div>
-                                    </a>
+                                    <div class="p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 group/card">
+                                        <a href="#leadership" class="block">
+                                            <div class="flex items-center space-x-3 mb-1">
+                                                <div class="w-8 h-8 rounded-lg hero-theme-bg text-white flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-user-tie"></i></div>
+                                                <span class="text-sm font-bold text-gray-900 group-hover/card:text-primary">Leadership Team</span>
+                                            </div>
+                                            <p class="menu-item-copy text-xs text-gray-600 pl-11 leading-relaxed" data-tooltip="Executive pioneers and advisors.">Executive pioneers and advisors...</p>
+                                        </a>
+                                    </div>
+                                    <div class="p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 group/card">
+                                        <a href="#news" class="block">
+                                            <div class="flex items-center space-x-3 mb-1">
+                                                <div class="w-8 h-8 rounded-lg hero-theme-bg text-white flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-newspaper"></i></div>
+                                                <span class="text-sm font-bold text-gray-900 group-hover/card:text-primary">News Room</span>
+                                            </div>
+                                            <p class="menu-item-copy text-xs text-gray-600 pl-11 leading-relaxed" data-tooltip="Latest announcements &amp; insights.">Latest announcements &amp; insights...</p>
+                                        </a>
+                                    </div>
                                 </div>
                                 <!-- Column 4: Feature Promo Card -->
                                 <div class="space-y-4 bg-gray-50 p-4 rounded-2xl border border-gray-100 flex flex-col justify-between">
-                                    <div class="space-y-3">
-                                        <span class="px-2.5 py-1 rounded-full bg-accent/20 text-accent text-[10px] font-extrabold uppercase tracking-wider">Enterprise Feature</span>
-                                        <h4 class="font-bold text-gray-900 text-sm">Interactive RCM &amp; Risk Tools</h4>
-                                        <p class="text-xs text-gray-600 leading-relaxed">
-                                            Explore live calculators for Medicare HCC RAF scoring, E/M utilization, and denial recovery.
-                                        </p>
+                                    <div class="spotlight-content space-y-4">
+                                        <span class="spotlight-badge inline-flex px-2.5 py-1 rounded-full bg-accent/20 text-accent text-[10px] font-extrabold uppercase tracking-wider">Company Spotlight</span>
+                                        <h4 class="font-bold text-gray-900 text-sm">Our Heritage</h4>
+                                        <p class="menu-item-copy spotlight-copy text-xs text-gray-600 leading-relaxed" data-tooltip="Pioneering AI Health Tech. Special Projects bridges clinical expertise with elite machine learning engineering.">Pioneering AI Health Tech. Special Projects bridges clinical expertise with elite machine learning engineering.</p>
                                     </div>
-                                    <a href="#tools-section" class="inline-flex items-center space-x-2 text-xs font-bold text-primary hover:underline">
-                                        <span>Launch Interactive Tools</span>
+                                    <a href="#about" class="inline-flex items-center space-x-2 text-xs font-bold text-primary hover:underline">
+                                        <span>Explore Our Heritage</span>
                                         <i class="fa-solid fa-arrow-right text-[10px]"></i>
                                     </a>
                                 </div>
@@ -193,21 +340,23 @@
                     </div>
 
                     <!-- Solutions Mega Menu -->
-                    <div class="relative group">
+                    <div class="relative group nav-menu">
                         <button class="flex items-center space-x-1 text-gray-700 font-medium hover:text-primary py-2 transition-colors">
                             <span>Solutions</span>
-                            <i class="fa-solid fa-chevron-down text-xs transition-transform group-hover:rotate-180"></i>
+                            <i class="fa-solid fa-plus text-xs group-hover:hidden"></i>
+                            <i class="fa-solid fa-minus text-xs hidden group-hover:inline-block"></i>
                         </button>
                         <div class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 w-[850px] bg-white text-gray-800 shadow-2xl rounded-2xl p-6 border border-gray-100">
                             <div class="grid grid-cols-3 gap-6">
                                 <div class="space-y-4">
+                                    <h4 class="text-xs font-extrabold uppercase tracking-wider text-primary border-b border-gray-100 pb-2">Coding &amp; Revenue Cycle</h4>
                                     <div class="p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 group/card">
                                         <a href="#services" class="block">
                                             <div class="flex items-center space-x-3 mb-1">
                                                 <div class="w-8 h-8 rounded-lg hero-theme-bg text-white flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-brain"></i></div>
                                                 <span class="text-sm font-bold text-gray-900 group-hover/card:text-primary">AI-Enabled CAC Coding</span>
                                             </div>
-                                            <p class="text-xs text-gray-600 pl-11">Computer-assisted coding with advanced NLP for accurate diagnostic code extraction.</p>
+                                            <p class="menu-item-copy text-xs text-gray-600 pl-11 leading-relaxed" data-tooltip="Computer-assisted coding with advanced NLP for accurate diagnostic code extraction.">Computer-assisted coding with advanced NLP for accurate diagnostic...</p>
                                         </a>
                                     </div>
                                     <div class="p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 group/card">
@@ -216,18 +365,19 @@
                                                 <div class="w-8 h-8 rounded-lg hero-theme-bg text-white flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-chart-line"></i></div>
                                                 <span class="text-sm font-bold text-gray-900 group-hover/card:text-primary">Revenue Cycle Management</span>
                                             </div>
-                                            <p class="text-xs text-gray-600 pl-11">End-to-end financial workflows from registration to final reimbursement.</p>
+                                            <p class="menu-item-copy text-xs text-gray-600 pl-11 leading-relaxed" data-tooltip="End-to-end financial workflows from registration to final reimbursement.">End-to-end financial workflows from registration to final...</p>
                                         </a>
                                     </div>
                                 </div>
                                 <div class="space-y-4">
+                                    <h4 class="text-xs font-extrabold uppercase tracking-wider text-primary border-b border-gray-100 pb-2">Billing &amp; Clinical Documentation</h4>
                                     <div class="p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 group/card">
                                         <a href="#services" class="block">
                                             <div class="flex items-center space-x-3 mb-1">
                                                 <div class="w-8 h-8 rounded-lg hero-theme-bg text-white flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-file-medical"></i></div>
                                                 <span class="text-sm font-bold text-gray-900 group-hover/card:text-primary">Medical Billing & Coding</span>
                                             </div>
-                                            <p class="text-xs text-gray-600 pl-11">Certified coding specialists reducing claim denials and accelerating cash flow.</p>
+                                            <p class="menu-item-copy text-xs text-gray-600 pl-11 leading-relaxed" data-tooltip="Certified coding specialists reducing claim denials and accelerating cash flow.">Certified coding specialists reducing claim denials and...</p>
                                         </a>
                                     </div>
                                     <div class="p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 group/card">
@@ -236,21 +386,19 @@
                                                 <div class="w-8 h-8 rounded-lg hero-theme-bg text-white flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-shield-halved"></i></div>
                                                 <span class="text-sm font-bold text-gray-900 group-hover/card:text-primary">Clinical Documentation (CDI)</span>
                                             </div>
-                                            <p class="text-xs text-gray-600 pl-11">Automated physician query generation to elevate Case Mix Index.</p>
+                                            <p class="menu-item-copy text-xs text-gray-600 pl-11 leading-relaxed" data-tooltip="Automated physician query generation to elevate Case Mix Index.">Automated physician query generation to elevate Case Mix...</p>
                                         </a>
                                     </div>
                                 </div>
                                 <!-- Feature Promo Card -->
                                 <div class="space-y-4 bg-gray-50 p-4 rounded-2xl border border-gray-100 flex flex-col justify-between">
-                                    <div class="space-y-3">
-                                        <span class="px-2.5 py-1 rounded-full bg-accent/20 text-accent text-[10px] font-extrabold uppercase tracking-wider">Enterprise Feature</span>
-                                        <h4 class="font-bold text-gray-900 text-sm">Interactive RCM &amp; Risk Tools</h4>
-                                        <p class="text-xs text-gray-600 leading-relaxed">
-                                            Explore live calculators for Medicare HCC RAF scoring, E/M utilization, and denial recovery.
-                                        </p>
+                                    <div class="spotlight-content space-y-4">
+                                        <span class="spotlight-badge inline-flex px-2.5 py-1 rounded-full bg-accent/20 text-accent text-[10px] font-extrabold uppercase tracking-wider">Solutions Spotlight</span>
+                                        <h4 class="font-bold text-gray-900 text-sm">Enterprise Services</h4>
+                                        <p class="menu-item-copy spotlight-copy text-xs text-gray-600 leading-relaxed" data-tooltip="Full-Suite RCM &amp; CAC. Modular software and managed services designed to maximize hospital reimbursements.">Full-Suite RCM &amp; CAC. Modular software and managed services designed to maximize hospital reimbursements.</p>
                                     </div>
-                                    <a href="#tools-section" class="inline-flex items-center space-x-2 text-xs font-bold text-primary hover:underline">
-                                        <span>Launch Interactive Tools</span>
+                                    <a href="#services" class="inline-flex items-center space-x-2 text-xs font-bold text-primary hover:underline">
+                                        <span>Explore Enterprise Services</span>
                                         <i class="fa-solid fa-arrow-right text-[10px]"></i>
                                     </a>
                                 </div>
@@ -259,45 +407,59 @@
                     </div>
 
                     <!-- Technology Mega Menu -->
-                    <div class="relative group">
+                    <div class="relative group nav-menu">
                         <button class="flex items-center space-x-1 text-gray-700 font-medium hover:text-primary py-2 transition-colors">
                             <span>Technology</span>
-                            <i class="fa-solid fa-chevron-down text-xs transition-transform group-hover:rotate-180"></i>
+                            <i class="fa-solid fa-plus text-xs group-hover:hidden"></i>
+                            <i class="fa-solid fa-minus text-xs hidden group-hover:inline-block"></i>
                         </button>
-                        <div class="dropdown-menu absolute top-full left-0 w-[850px] bg-white text-gray-800 shadow-2xl rounded-2xl p-6 border border-gray-100">
+                        <div class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 w-[850px] bg-white text-gray-800 shadow-2xl rounded-2xl p-6 border border-gray-100">
                             <div class="grid grid-cols-4 gap-6">
-                                <div class="space-y-3">
+                                <div class="space-y-4">
                                     <h4 class="text-xs font-extrabold uppercase tracking-wider text-primary border-b border-gray-100 pb-2">AI Workflow</h4>
-                                    <a href="#ai-process" class="block p-2 rounded-xl hover:bg-gray-50 transition-colors group/card">
-                                        <div class="text-sm font-bold text-gray-900 group-hover/card:text-primary">AI & Technology Process</div>
-                                        <div class="text-xs text-gray-500 mt-0.5">Ingestion, NLP & validation pipeline</div>
-                                    </a>
+                                    <div class="p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 group/card">
+                                        <a href="#ai-process" class="block">
+                                            <div class="flex items-center space-x-3 mb-1">
+                                                <div class="w-8 h-8 rounded-lg hero-theme-bg text-white flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-microchip"></i></div>
+                                                <span class="text-sm font-bold text-gray-900 group-hover/card:text-primary">AI &amp; Technology Process</span>
+                                            </div>
+                                            <p class="menu-item-copy text-xs text-gray-600 pl-11 leading-relaxed" data-tooltip="Ingestion, NLP &amp; validation pipeline.">Ingestion, NLP &amp; validation pipeline...</p>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="space-y-3">
+                                <div class="space-y-4">
                                     <h4 class="text-xs font-extrabold uppercase tracking-wider text-primary border-b border-gray-100 pb-2">Engineering</h4>
-                                    <a href="#software-process" class="block p-2 rounded-xl hover:bg-gray-50 transition-colors group/card">
-                                        <div class="text-sm font-bold text-gray-900 group-hover/card:text-primary">Software Development</div>
-                                        <div class="text-xs text-gray-500 mt-0.5">Agile sprints & CI/CD pipelines</div>
-                                    </a>
+                                    <div class="p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 group/card">
+                                        <a href="#software-process" class="block">
+                                            <div class="flex items-center space-x-3 mb-1">
+                                                <div class="w-8 h-8 rounded-lg hero-theme-bg text-white flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-code"></i></div>
+                                                <span class="text-sm font-bold text-gray-900 group-hover/card:text-primary">Software Development</span>
+                                            </div>
+                                            <p class="menu-item-copy text-xs text-gray-600 pl-11 leading-relaxed" data-tooltip="Agile sprints &amp; CI/CD pipelines.">Agile sprints &amp; CI/CD pipelines...</p>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="space-y-3">
+                                <div class="space-y-4">
                                     <h4 class="text-xs font-extrabold uppercase tracking-wider text-primary border-b border-gray-100 pb-2">Security</h4>
-                                    <a href="#compliance" class="block p-2 rounded-xl hover:bg-gray-50 transition-colors group/card">
-                                        <div class="text-sm font-bold text-gray-900 group-hover/card:text-primary">Compliance & Security</div>
-                                        <div class="text-xs text-gray-500 mt-0.5">HIPAA, SOC 2 & ISO certified</div>
-                                    </a>
+                                    <div class="p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 group/card">
+                                        <a href="#compliance" class="block">
+                                            <div class="flex items-center space-x-3 mb-1">
+                                                <div class="w-8 h-8 rounded-lg hero-theme-bg text-white flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-shield-halved"></i></div>
+                                                <span class="text-sm font-bold text-gray-900 group-hover/card:text-primary">Compliance &amp; Security</span>
+                                            </div>
+                                            <p class="menu-item-copy text-xs text-gray-600 pl-11 leading-relaxed" data-tooltip="HIPAA, SOC 2 &amp; ISO certified.">HIPAA, SOC 2 &amp; ISO certified...</p>
+                                        </a>
+                                    </div>
                                 </div>
                                 <!-- Feature Promo Card -->
                                 <div class="space-y-4 bg-gray-50 p-4 rounded-2xl border border-gray-100 flex flex-col justify-between">
-                                    <div class="space-y-3">
-                                        <span class="px-2.5 py-1 rounded-full bg-accent/20 text-accent text-[10px] font-extrabold uppercase tracking-wider">Enterprise Feature</span>
-                                        <h4 class="font-bold text-gray-900 text-sm">Interactive RCM &amp; Risk Tools</h4>
-                                        <p class="text-xs text-gray-600 leading-relaxed">
-                                            Explore live calculators for Medicare HCC RAF scoring, E/M utilization, and denial recovery.
-                                        </p>
+                                    <div class="spotlight-content space-y-3">
+                                        <span class="spotlight-badge inline-flex px-2.5 py-1 rounded-full bg-accent/20 text-accent text-[10px] font-extrabold uppercase tracking-wider">Technology Spotlight</span>
+                                        <h4 class="font-bold text-gray-900 text-sm">Secure Stack</h4>
+                                        <p class="menu-item-copy spotlight-copy text-xs text-gray-600 leading-relaxed" data-tooltip="HIPAA &amp; ISO Certified. Bank-grade encryption, zero local PHI storage, and automated compliance auditing.">HIPAA &amp; ISO Certified. Bank-grade encryption, zero local PHI storage, and automated compliance auditing.</p>
                                     </div>
-                                    <a href="#tools-section" class="inline-flex items-center space-x-2 text-xs font-bold text-primary hover:underline">
-                                        <span>Launch Interactive Tools</span>
+                                    <a href="#compliance" class="inline-flex items-center space-x-2 text-xs font-bold text-primary hover:underline">
+                                        <span>Explore Secure Stack</span>
                                         <i class="fa-solid fa-arrow-right text-[10px]"></i>
                                     </a>
                                 </div>
@@ -306,53 +468,89 @@
                     </div>
 
                     <!-- Tools Mega Menu -->
-                    <div class="relative group">
+                    <div class="relative group nav-menu">
                         <button class="flex items-center space-x-1 text-gray-700 font-medium hover:text-primary py-2 transition-colors">
                             <span>Tools</span>
-                            <i class="fa-solid fa-chevron-down text-xs transition-transform group-hover:rotate-180"></i>
+                            <i class="fa-solid fa-plus text-xs group-hover:hidden"></i>
+                            <i class="fa-solid fa-minus text-xs hidden group-hover:inline-block"></i>
                         </button>
                         <div class="dropdown-menu absolute top-full right-0 w-[850px] bg-white text-gray-800 shadow-2xl rounded-2xl p-6 border border-gray-100">
                             <div class="grid grid-cols-3 gap-6">
-                                <div class="space-y-2">
-                                    <a href="#tools-section" onclick="switchTool('raf')" class="block p-3 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100 group/card">
-                                        <div class="text-sm font-bold text-gray-900 group-hover/card:text-primary flex items-center gap-2"><i class="fa-solid fa-calculator text-primary"></i> Medicare HCC RAF Calculator</div>
-                                        <div class="text-xs text-gray-500 mt-0.5">Estimate risk adjustment factor & revenue</div>
-                                    </a>
-                                    <a href="#tools-section" onclick="switchTool('em')" class="block p-3 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100 group/card">
-                                        <div class="text-sm font-bold text-gray-900 group-hover/card:text-primary flex items-center gap-2"><i class="fa-solid fa-chart-column text-primary"></i> E/M Utilization Benchmarking</div>
-                                        <div class="text-xs text-gray-500 mt-0.5">Compare outpatient billing against national norms</div>
-                                    </a>
-                                    <a href="#tools-section" onclick="switchTool('icd')" class="block p-3 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100 group/card">
-                                        <div class="text-sm font-bold text-gray-900 group-hover/card:text-primary flex items-center gap-2"><i class="fa-solid fa-magnifying-glass text-primary"></i> ICD-10 ➜ CMS_HCC Lookup</div>
-                                        <div class="text-xs text-gray-500 mt-0.5">Crosswalk diagnosis codes to risk categories</div>
-                                    </a>
+                                <div class="space-y-4">
+                                    <h4 class="text-xs font-extrabold uppercase tracking-wider text-primary border-b border-gray-100 pb-2">Risk &amp; Coding Tools</h4>
+                                    <div class="p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 group/card">
+                                        <a href="#tools-section" onclick="switchTool('raf')" class="block">
+                                            <div class="flex items-center space-x-3 mb-1">
+                                                <div class="w-8 h-8 rounded-lg hero-theme-bg text-white flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-calculator"></i></div>
+                                                <span class="text-sm font-bold text-gray-900 group-hover/card:text-primary">Medicare HCC RAF Calculator</span>
+                                            </div>
+                                            <p class="menu-item-copy text-xs text-gray-600 pl-11 leading-relaxed" data-tooltip="Estimate risk adjustment factor &amp; revenue.">Estimate risk adjustment factor &amp; revenue...</p>
+                                        </a>
+                                    </div>
+                                    <div class="p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 group/card">
+                                        <a href="#tools-section" onclick="switchTool('em')" class="block">
+                                            <div class="flex items-center space-x-3 mb-1">
+                                                <div class="w-8 h-8 rounded-lg hero-theme-bg text-white flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-chart-column"></i></div>
+                                                <span class="text-sm font-bold text-gray-900 group-hover/card:text-primary">E/M Utilization Benchmarking</span>
+                                            </div>
+                                            <p class="menu-item-copy text-xs text-gray-600 pl-11 leading-relaxed" data-tooltip="Compare outpatient billing against national norms.">Compare outpatient billing against national...</p>
+                                        </a>
+                                    </div>
+                                    <div class="p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 group/card">
+                                        <a href="#tools-section" onclick="switchTool('icd')" class="block">
+                                            <div class="flex items-center space-x-3 mb-1">
+                                                <div class="w-8 h-8 rounded-lg hero-theme-bg text-white flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-magnifying-glass"></i></div>
+                                                <span class="text-sm font-bold text-gray-900 group-hover/card:text-primary">ICD-10 ➜ CMS_HCC Lookup</span>
+                                            </div>
+                                            <p class="menu-item-copy text-xs text-gray-600 pl-11 leading-relaxed" data-tooltip="Crosswalk diagnosis codes to risk categories.">Crosswalk diagnosis codes to risk...</p>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="space-y-2">
-                                    <a href="#tools-section" onclick="switchTool('denial')" class="block p-3 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100 group/card">
-                                        <div class="text-sm font-bold text-gray-900 group-hover/card:text-primary flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation text-primary"></i> Claim Denial & Loss Calculator</div>
-                                        <div class="text-xs text-gray-500 mt-0.5">Calculate financial loss & AI recovery potential</div>
-                                    </a>
-                                    <a href="#tools-section" onclick="switchTool('cdi')" class="block p-3 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100 group/card">
-                                        <div class="text-sm font-bold text-gray-900 group-hover/card:text-primary flex items-center gap-2"><i class="fa-solid fa-file-invoice-dollar text-primary"></i> CDI Query ROI Estimator</div>
-                                        <div class="text-xs text-gray-500 mt-0.5">Estimate CMI lift and inpatient revenue gain</div>
-                                    </a>
-                                    <a href="#tools-section" onclick="switchTool('rcm')" class="block p-3 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100 group/card">
-                                        <div class="text-sm font-bold text-gray-900 group-hover/card:text-primary flex items-center gap-2"><i class="fa-solid fa-piggy-bank text-primary"></i> RCM Outsourcing Savings</div>
-                                        <div class="text-xs text-gray-500 mt-0.5">Compare in-house overhead vs. RCM fee</div>
-                                    </a>
-                                    <a href="#tools-section" onclick="switchTool('ar')" class="block p-3 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100 group/card">
-                                        <div class="text-sm font-bold text-gray-900 group-hover/card:text-primary flex items-center gap-2"><i class="fa-solid fa-clock-rotate-left text-primary"></i> AR Days & Cash Flow Acceleration</div>
-                                        <div class="text-xs text-gray-500 mt-0.5">Unlock working capital via reduced AR days</div>
-                                    </a>
+                                <div class="space-y-4">
+                                    <h4 class="text-xs font-extrabold uppercase tracking-wider text-primary border-b border-gray-100 pb-2">Revenue &amp; Recovery Tools</h4>
+                                    <div class="p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 group/card">
+                                        <a href="#tools-section" onclick="switchTool('denial')" class="block">
+                                            <div class="flex items-center space-x-3 mb-1">
+                                                <div class="w-8 h-8 rounded-lg hero-theme-bg text-white flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                                                <span class="text-sm font-bold text-gray-900 group-hover/card:text-primary">Claim Denial &amp; Loss Calculator</span>
+                                            </div>
+                                            <p class="menu-item-copy text-xs text-gray-600 pl-11 leading-relaxed" data-tooltip="Calculate financial loss &amp; AI recovery potential.">Calculate financial loss &amp; AI recovery...</p>
+                                        </a>
+                                    </div>
+                                    <div class="p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 group/card">
+                                        <a href="#tools-section" onclick="switchTool('cdi')" class="block">
+                                            <div class="flex items-center space-x-3 mb-1">
+                                                <div class="w-8 h-8 rounded-lg hero-theme-bg text-white flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                                                <span class="text-sm font-bold text-gray-900 group-hover/card:text-primary">CDI Query ROI Estimator</span>
+                                            </div>
+                                            <p class="menu-item-copy text-xs text-gray-600 pl-11 leading-relaxed" data-tooltip="Estimate CMI lift and inpatient revenue gain.">Estimate CMI lift and inpatient...</p>
+                                        </a>
+                                    </div>
+                                    <div class="p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 group/card">
+                                        <a href="#tools-section" onclick="switchTool('rcm')" class="block">
+                                            <div class="flex items-center space-x-3 mb-1">
+                                                <div class="w-8 h-8 rounded-lg hero-theme-bg text-white flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-piggy-bank"></i></div>
+                                                <span class="text-sm font-bold text-gray-900 group-hover/card:text-primary">RCM Outsourcing Savings</span>
+                                            </div>
+                                            <p class="menu-item-copy text-xs text-gray-600 pl-11 leading-relaxed" data-tooltip="Compare in-house overhead vs. RCM fee.">Compare in-house overhead vs. RCM...</p>
+                                        </a>
+                                    </div>
+                                    <div class="p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 group/card">
+                                        <a href="#tools-section" onclick="switchTool('ar')" class="block">
+                                            <div class="flex items-center space-x-3 mb-1">
+                                                <div class="w-8 h-8 rounded-lg hero-theme-bg text-white flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                                                <span class="text-sm font-bold text-gray-900 group-hover/card:text-primary">AR Days &amp; Cash Flow Acceleration</span>
+                                            </div>
+                                            <p class="menu-item-copy text-xs text-gray-600 pl-11 leading-relaxed" data-tooltip="Unlock working capital via reduced AR days.">Unlock working capital via reduced...</p>
+                                        </a>
+                                    </div>
                                 </div>
                                 <!-- Feature Promo Card -->
                                 <div class="space-y-4 bg-gray-50 p-4 rounded-2xl border border-gray-100 flex flex-col justify-between">
-                                    <div class="space-y-3">
-                                        <span class="px-2.5 py-1 rounded-full bg-accent/20 text-accent text-[10px] font-extrabold uppercase tracking-wider">Enterprise Feature</span>
+                                    <div class="spotlight-content space-y-4">
+                                        <span class="spotlight-badge inline-flex px-2.5 py-1 rounded-full bg-accent/20 text-accent text-[10px] font-extrabold uppercase tracking-wider">Enterprise Feature</span>
                                         <h4 class="font-bold text-gray-900 text-sm">Interactive RCM &amp; Risk Tools</h4>
-                                        <p class="text-xs text-gray-600 leading-relaxed">
-                                            Explore live calculators for Medicare HCC RAF scoring, E/M utilization, and denial recovery.
-                                        </p>
+                                        <p class="menu-item-copy spotlight-copy text-xs text-gray-600 leading-relaxed" data-tooltip="Explore live calculators for Medicare HCC RAF scoring, E/M utilization, and denial recovery.">Explore live calculators for Medicare HCC RAF scoring, E/M utilization, and denial recovery.</p>
                                     </div>
                                     <a href="#tools-section" class="inline-flex items-center space-x-2 text-xs font-bold text-primary hover:underline">
                                         <span>Launch Interactive Tools</span>
@@ -364,50 +562,59 @@
                     </div>
 
                     <!-- Connect Mega Menu -->
-                    <div class="relative group">
+                    <div class="relative group nav-menu">
                         <button class="flex items-center space-x-1 text-gray-700 font-medium hover:text-primary py-2 transition-colors">
                             <span>Connect</span>
-                            <i class="fa-solid fa-chevron-down text-xs transition-transform group-hover:rotate-180"></i>
+                            <i class="fa-solid fa-plus text-xs group-hover:hidden"></i>
+                            <i class="fa-solid fa-minus text-xs hidden group-hover:inline-block"></i>
                         </button>
                         <div class="dropdown-menu absolute top-full right-0 w-[650px] bg-white text-gray-800 shadow-2xl rounded-2xl p-6 border border-gray-100">
                             <div class="grid grid-cols-2 gap-6">
                                 <div class="space-y-3">
                                     <h4 class="text-xs font-extrabold uppercase tracking-wider text-primary border-b border-gray-100 pb-2">Get in Touch</h4>
-                                    <a href="#careers" class="block p-3 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100 group/card">
-                                        <div class="text-sm font-bold text-gray-900 group-hover/card:text-primary flex items-center gap-2"><i class="fa-solid fa-briefcase text-primary"></i> Careers</div>
-                                        <div class="text-xs text-gray-500 mt-0.5">Join our growing team</div>
-                                    </a>
-                                    <a href="#contact" class="block p-3 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100 group/card">
-                                        <div class="text-sm font-bold text-gray-900 group-hover/card:text-primary flex items-center gap-2"><i class="fa-solid fa-envelope text-primary"></i> Contact Us</div>
-                                        <div class="text-xs text-gray-500 mt-0.5">Get in touch with experts</div>
-                                    </a>
+                                    <div class="p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 group/card">
+                                        <a href="#careers" class="block">
+                                            <div class="flex items-center space-x-3 mb-1">
+                                                <div class="w-8 h-8 rounded-lg hero-theme-bg text-white flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-briefcase"></i></div>
+                                                <span class="text-sm font-bold text-gray-900 group-hover/card:text-primary">Careers</span>
+                                            </div>
+                                            <p class="menu-item-copy text-xs text-gray-600 pl-11 leading-relaxed" data-tooltip="Join our growing team.">Join our growing team...</p>
+                                        </a>
+                                    </div>
+                                    <div class="p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 group/card">
+                                        <a href="#contact" class="block">
+                                            <div class="flex items-center space-x-3 mb-1">
+                                                <div class="w-8 h-8 rounded-lg hero-theme-bg text-white flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-envelope"></i></div>
+                                                <span class="text-sm font-bold text-gray-900 group-hover/card:text-primary">Contact Us</span>
+                                            </div>
+                                            <p class="menu-item-copy text-xs text-gray-600 pl-11 leading-relaxed" data-tooltip="Get in touch with experts.">Get in touch with experts...</p>
+                                        </a>
+                                    </div>
                                 </div>
                                 <!-- Feature Promo Card -->
                                 <div class="space-y-4 bg-gray-50 p-4 rounded-2xl border border-gray-100 flex flex-col justify-between">
-                                    <div class="space-y-3">
-                                        <span class="px-2.5 py-1 rounded-full bg-accent/20 text-accent text-[10px] font-extrabold uppercase tracking-wider">Enterprise Feature</span>
-                                        <h4 class="font-bold text-gray-900 text-sm">Interactive RCM &amp; Risk Tools</h4>
-                                        <p class="text-xs text-gray-600 leading-relaxed">
-                                            Explore live calculators for Medicare HCC RAF scoring, E/M utilization, and denial recovery.
-                                        </p>
+                                    <div class="spotlight-content space-y-3">
+                                        <span class="spotlight-badge inline-flex px-2.5 py-1 rounded-full bg-accent/20 text-accent text-[10px] font-extrabold uppercase tracking-wider">Consultation</span>
+                                        <h4 class="font-bold text-gray-900 text-sm">Expert Consultation</h4>
+                                        <p class="menu-item-copy spotlight-copy text-xs text-gray-600 leading-relaxed" data-tooltip="Schedule an AI Demo. Connect with healthcare RCM specialists to review your billing and coding workflows.">Schedule an AI Demo. Connect with healthcare RCM specialists to review your billing and coding workflows.</p>
                                     </div>
-                                    <a href="#tools-section" class="inline-flex items-center space-x-2 text-xs font-bold text-primary hover:underline">
-                                        <span>Launch Interactive Tools</span>
+                                    <a href="#contact" class="inline-flex items-center space-x-2 text-xs font-bold text-primary hover:underline">
+                                        <span>Schedule an AI Demo</span>
                                         <i class="fa-solid fa-arrow-right text-[10px]"></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </nav>
 
                 <!-- Right Actions: Theme Selector & CTA -->
                 <div class="hidden lg:flex items-center space-x-4">
                     <!-- Theme Selector Dropdown -->
                     <div class="relative group">
-                        <button class="flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-800 transition-colors text-sm font-medium border border-gray-200">
+                        <button aria-label="Themes" class="flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-800 transition-colors text-sm font-medium border border-gray-200">
                             <i class="fa-solid fa-palette text-primary"></i>
-                            <span>Themes</span>
                         </button>
                         <div class="absolute right-0 top-full mt-2 w-60 bg-white text-gray-800 shadow-xl rounded-xl p-3 border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 max-h-96 overflow-y-auto">
                             <p class="text-xs font-semibold text-gray-400 mb-2 px-2 uppercase tracking-wider">Select Palette</p>
@@ -474,6 +681,9 @@
                         </div>
                     </div>
 
+                    <a href="#contact" class="flex items-center px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-primary text-sm font-semibold hover:bg-primary hover:text-white transition-colors">
+                        <span>Login</span>
+                    </a>
                     <a href="#contact" class="px-5 py-2.5 rounded-xl hero-theme-bg text-white font-semibold shadow-md hover:opacity-95 transition-all">Request Demo</a>
                 </div>
 
@@ -530,6 +740,7 @@
                 <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Connect</p>
                 <a href="#careers" class="block py-1 text-gray-700 hover:text-primary">Careers</a>
                 <a href="#contact" class="block py-1 text-gray-700 hover:text-primary">Contact Us</a>
+                <a href="#contact" class="block py-1 text-gray-700 hover:text-primary">Login</a>
             </div>
             <div class="pt-4 border-t border-gray-100">
                 <a href="#contact" class="block text-center py-2.5 rounded-xl hero-theme-bg text-white font-medium">Get Started</a>
@@ -543,32 +754,32 @@
         <div id="carousel-slides" class="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
             <!-- Slide One -->
             <div class="slide absolute inset-0 opacity-100 transition-opacity duration-1000 ease-in-out">
-                <div class="slide-bg-img absolute inset-0 bg-cover bg-center animate-kenburns transition-transform duration-1000" style="background-image: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1600&q=85');"></div>
+                <div class="slide-bg-img absolute inset-0 bg-cover bg-center animate-kenburns transition-transform duration-1000" style="background-image: url('https://plus.unsplash.com/premium_photo-1733317306663-3c202d428d65?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D');"></div>
                 <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/20"></div>
             </div>
             <!-- Slide Two (Enterprise Security Slide) -->
             <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
-                <div class="slide-bg-img absolute inset-0 bg-cover bg-center transition-transform duration-1000" style="background-image: url('https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1600&q=85');"></div>
+                <div class="slide-bg-img absolute inset-0 bg-cover bg-center transition-transform duration-1000" style="background-image: url('https://plus.unsplash.com/premium_photo-1700830658802-4cb9f1cb7765?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D');"></div>
                 <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/20"></div>
             </div>
-            <!-- Slide Three -->
-            <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
-                <div class="slide-bg-img absolute inset-0 bg-cover bg-center transition-transform duration-1000" style="background-image: url('https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&w=1600&q=85');"></div>
-                <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/20"></div>
-            </div>
-            <!-- Slide Four -->
-            <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
-                <div class="slide-bg-img absolute inset-0 bg-cover bg-center transition-transform duration-1000" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1600&q=85');"></div>
-                <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/20"></div>
-            </div>
-            <!-- Slide Five (AI Process Slide) -->
+            <!-- Slide Three (AI Process Slide) -->
             <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
                 <div class="slide-bg-img absolute inset-0 bg-cover bg-center transition-transform duration-1000" style="background-image: url('https://plus.unsplash.com/premium_photo-1683121710572-7723bd2e235d?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D');"></div>
                 <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/20"></div>
             </div>
-            <!-- Slide Six (Software Development Process Slide) -->
+            <!-- Slide Four -->
+            <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
+                <div class="slide-bg-img absolute inset-0 bg-cover bg-center transition-transform duration-1000" style="background-image: url('https://plus.unsplash.com/premium_photo-1663013424060-48c89f34de73?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D');"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/20"></div>
+            </div>
+            <!-- Slide Five -->
             <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
                 <div class="slide-bg-img absolute inset-0 bg-cover bg-center transition-transform duration-1000" style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1600&q=85');"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/20"></div>
+            </div>
+            <!-- Slide Six -->
+            <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
+                <div class="slide-bg-img absolute inset-0 bg-cover bg-center transition-transform duration-1000" style="background-image: url('https://images.unsplash.com/photo-1690783782198-e3815ed6aac0?auto=format&fit=crop&w=1600&q=85');"></div>
                 <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/20"></div>
             </div>
         </div>
@@ -579,11 +790,11 @@
                 <div id="slide-content" class="lg:col-span-7 space-y-6 transition-all duration-500">
                     <div id="hero-badge" class="flex flex-wrap gap-2 mb-3">
                         <span class="inline-flex items-center px-4 py-1.5 rounded-full bg-accent text-gray-950 text-xs sm:text-sm font-bold shadow-lg">
-                            <i class="fa-solid fa-sparkles mr-2"></i> <span id="badge-text-1">AI-Enabled CAC Coding</span>
+                            <i class="fa-solid fa-file-medical mr-2" aria-hidden="true"></i> <span id="badge-text-1">AI-Enabled CAC Coding & Revenue Cycle Management</span>
                         </span>
-                        <span class="inline-flex items-center px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/40 text-white text-xs sm:text-sm font-semibold shadow-md">
-                            <i class="fa-solid fa-shield-halved mr-1.5 text-accent"></i> <span id="badge-text-2">Revenue Cycle Management</span>
-                        </span>
+                        <!-- <span class="inline-flex items-center px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/40 text-white text-xs sm:text-sm font-semibold shadow-md">
+                            <i class="fa-solid fa-shield-halved mr-1.5 text-accent"></i>
+                        </span> -->
                     </div>
                     <h1 id="hero-title" class="text-4xl sm:text-6xl font-sans font-extrabold tracking-tight leading-tight text-white drop-shadow-md">
                         Transforming Healthcare through Advanced AI Intelligence
@@ -621,9 +832,9 @@
 
                 <div class="lg:col-span-5 pointer-events-auto">
                     <div class="bg-white/10 backdrop-blur-md p-4 rounded-3xl border border-white/20 shadow-2xl">
-                        <img id="hero-img" src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=85" alt="AI-Powered Clinical Chart Analysis" class="rounded-2xl w-full h-80 sm:h-[400px] object-cover shadow-2xl transition-all duration-500">
+                        <img id="hero-img" src="https://plus.unsplash.com/premium_photo-1733317306663-3c202d428d65?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" alt="Medical professionals reviewing documents at a table" class="rounded-2xl w-full h-80 sm:h-[400px] object-cover shadow-2xl transition-all duration-500">
                         <div class="pt-4 text-center">
-                            <span id="hero-img-caption" class="text-xs uppercase tracking-wider text-white/80 font-semibold">Advanced Hospital AI Diagnostics & Clinical Dashboard</span>
+                            <span id="hero-img-caption" class="text-xs uppercase tracking-wider text-white/80 font-semibold">Medical Professionals Reviewing Documents at a Table</span>
                         </div>
                     </div>
                 </div>
@@ -631,14 +842,14 @@
         </div>
 
         <!-- Carousel Navigation & Indicators -->
-        <div class="absolute bottom-4 sm:bottom-6 left-0 right-0 px-4 flex items-center justify-between z-20 pointer-events-auto max-w-7xl mx-auto">
+        <div class="absolute inset-0 z-20 pointer-events-none">
             <!-- Mobile/Desktop Prominent Previous Arrow -->
-            <button onclick="prevSlide()" class="w-12 h-12 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center transition-all shadow-lg border border-white/30 backdrop-blur-md" aria-label="Previous Slide">
-                <i class="fa-solid fa-chevron-left text-sm sm:text-xs"></i>
+            <button onclick="prevSlide()" class="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center transition-all shadow-lg border border-white/30 backdrop-blur-md pointer-events-auto" aria-label="Previous Slide">
+                <i class="fa-solid fa-chevron-left text-lg sm:text-xl"></i>
             </button>
 
             <!-- Dots Indicators -->
-            <div class="flex items-center space-x-2 sm:space-x-3 bg-black/40 px-4 py-2 rounded-full backdrop-blur-md border border-white/20">
+            <div class="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex items-center space-x-2 sm:space-x-3 bg-black/40 px-4 py-2 rounded-full backdrop-blur-md border border-white/20 pointer-events-auto">
                 <button onclick="currentSlide(0)" class="dot w-3 h-3 sm:w-2.5 sm:h-2.5 rounded-full bg-white transition-all"></button>
                 <button onclick="currentSlide(1)" class="dot w-3 h-3 sm:w-2.5 sm:h-2.5 rounded-full bg-white/50 transition-all"></button>
                 <button onclick="currentSlide(2)" class="dot w-3 h-3 sm:w-2.5 sm:h-2.5 rounded-full bg-white/50 transition-all"></button>
@@ -648,8 +859,8 @@
             </div>
 
             <!-- Mobile/Desktop Prominent Next Arrow -->
-            <button onclick="nextSlide()" class="w-12 h-12 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center transition-all shadow-lg border border-white/30 backdrop-blur-md" aria-label="Next Slide">
-                <i class="fa-solid fa-chevron-right text-sm sm:text-xs"></i>
+            <button onclick="nextSlide()" class="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center transition-all shadow-lg border border-white/30 backdrop-blur-md pointer-events-auto" aria-label="Next Slide">
+                <i class="fa-solid fa-chevron-right text-lg sm:text-xl"></i>
             </button>
         </div>
     </section>
@@ -2178,11 +2389,12 @@
         const slideData = [
             {
                 badge: "AI-Enabled CAC Coding & Revenue Cycle Management",
+                badgeIcon: "fa-file-medical",
                 title: "Transforming Healthcare through Advanced AI Intelligence",
                 desc: "Empowering healthcare providers, health systems, and physician groups with breakthrough computer-assisted coding and optimized revenue cycle performance.",
                 bullets: false,
-                img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=85",
-                caption: "Advanced Hospital AI Diagnostics & Clinical Dashboard",
+                img: "https://plus.unsplash.com/premium_photo-1733317306663-3c202d428d65?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+                caption: "Medical Professionals Reviewing Documents at a Table",
                 cta1Text: "Request AI Demo",
                 cta1Link: "#contact",
                 cta2Text: "Explore Products",
@@ -2190,54 +2402,46 @@
             },
             {
                 badge: "Enterprise Security & Trust",
+                badgeIcon: "fa-shield-halved",
                 title: "Enterprise-Grade Security & HIPAA-Compliant Infrastructure",
                 desc: "Protecting sensitive Protected Health Information (PHI) with bank-grade encryption and audited offshore protocols.",
                 bullets: true,
-                img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=85",
-                caption: "Secure HIPAA & SOC 2 Type II Infrastructure",
+                img: "https://plus.unsplash.com/premium_photo-1700830658802-4cb9f1cb7765?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+                caption: "Fingerprint Security with a Blue Padlock",
                 cta1Text: "View Security Architecture",
                 cta1Link: "#compliance",
                 cta2Text: "Request Whitepaper",
                 cta2Link: "#contact"
             },
             {
-                badge: "Automated Compliance & Risk Management",
-                title: "Streamlining Clinical & Financial Workflows",
-                desc: "Advanced natural language processing and compliance checks ensuring accurate coding, reduced claim denials, and maximum reimbursement.",
-                bullets: false,
-                img: "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&w=1200&q=85",
-                caption: "Biomedical Engineering & Health Tech Data Analytics",
-                cta1Text: "Request AI Demo",
-                cta1Link: "#contact",
-                cta2Text: "Explore Products",
-                cta2Link: "#services"
-            },
-            {
-                badge: "Generative AI Code & Documentation Assistant",
-                title: "Next-Generation Medical Intelligence",
-                desc: "Transforming unstructured medical narratives into precise clinical intelligence with enterprise-grade security and HIPAA compliance.",
-                bullets: false,
-                img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=85",
-                caption: "Next-Gen Clinical Intelligence & AI Neural Networks",
-                cta1Text: "Get Started",
-                cta1Link: "#contact",
-                cta2Text: "Learn More",
-                cta2Link: "#about"
-            },
-            {
                 badge: "Artificial Intelligence Pipeline",
+                badgeIcon: "fa-microchip",
                 title: "Advanced AI & Technology Process",
                 desc: "From secure EHR ingestion and deep natural language parsing to automated guideline validation and seamless EHR delivery.",
                 bullets: false,
-                img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=85",
-                caption: "Robust AI Ingestion, Analysis & Validation Workflow",
+                img: "https://plus.unsplash.com/premium_photo-1683121710572-7723bd2e235d?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+                caption: "AI-Powered Clinical Intelligence & Technology",
                 cta1Text: "Explore AI Process",
                 cta1Link: "#ai-process",
                 cta2Text: "Contact Experts",
                 cta2Link: "#contact"
             },
             {
+                badge: "Generative AI Code & Documentation Assistant",
+                badgeIcon: "fa-wand-magic-sparkles",
+                title: "Next-Generation Medical Intelligence",
+                desc: "Transforming unstructured medical narratives into precise clinical intelligence with enterprise-grade security and HIPAA compliance.",
+                bullets: false,
+                img: "https://plus.unsplash.com/premium_photo-1663013424060-48c89f34de73?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+                caption: "Students Watching a Robot Demonstration",
+                cta1Text: "Get Started",
+                cta1Link: "#contact",
+                cta2Text: "Learn More",
+                cta2Link: "#about"
+            },
+            {
                 badge: "Agile Engineering Excellence",
+                badgeIcon: "fa-code",
                 title: "Rigorous Software Development Process",
                 desc: "Enterprise-grade software engineering featuring agile sprint development, automated QA testing, and secure HIPAA-compliant deployments.",
                 bullets: false,
@@ -2247,6 +2451,19 @@
                 cta1Link: "#software-process",
                 cta2Text: "Request Demo",
                 cta2Link: "#contact"
+            },
+            {
+                badge: "Automated Compliance & Risk Management",
+                badgeIcon: "fa-chart-line",
+                title: "Streamlining Clinical & Financial Workflows",
+                desc: "Advanced natural language processing and compliance checks ensuring accurate coding, reduced claim denials, and maximum reimbursement.",
+                bullets: false,
+                img: "https://images.unsplash.com/photo-1690783782198-e3815ed6aac0?auto=format&fit=crop&w=1200&q=85",
+                caption: "Stethoscope on a Pile of Money",
+                cta1Text: "Request AI Demo",
+                cta1Link: "#contact",
+                cta2Text: "Explore Products",
+                cta2Link: "#services"
             }
         ];
 
@@ -2264,14 +2481,45 @@
         const heroCta2Text = document.getElementById('hero-cta-2-text');
         const heroCta2 = document.getElementById('hero-cta-2');
         const slideContent = document.getElementById('slide-content');
+        let slideUpdateTimer;
+
+        function revealHeroTitle(title) {
+            heroTitle.setAttribute('aria-label', title);
+
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                heroTitle.textContent = title;
+                heroTitle.classList.remove('hero-title-enter');
+                return;
+            }
+
+            const words = title.split(' ');
+            const titleContent = document.createDocumentFragment();
+            heroTitle.classList.remove('hero-title-enter');
+            words.forEach((word, index) => {
+                const wordElement = document.createElement('span');
+                wordElement.className = 'hero-title-word';
+                wordElement.style.animationDelay = `${index * 70}ms`;
+                wordElement.textContent = word;
+                titleContent.append(wordElement);
+                if (index < words.length - 1) {
+                    titleContent.append(' ');
+                }
+            });
+            heroTitle.replaceChildren(titleContent);
+            void heroTitle.offsetWidth;
+            heroTitle.classList.add('hero-title-enter');
+        }
+
+        revealHeroTitle(slideData[0].title);
 
         function showSlide(index) {
+            clearTimeout(slideUpdateTimer);
             // Remove slide-animate to re-trigger animation
             slideContent.classList.remove('slide-animate');
             void slideContent.offsetWidth; // trigger reflow
             slideContent.classList.add('slide-animate');
 
-            setTimeout(() => {
+            slideUpdateTimer = setTimeout(() => {
                 // Update Slide Backgrounds with Ken Burns effect
                 slides.forEach((slide, i) => {
                     slide.style.opacity = i === index ? '1' : '0';
@@ -2289,11 +2537,11 @@
                 const data = slideData[index];
                 heroBadge.innerHTML = `
                     <span class="inline-flex items-center px-4 py-1.5 rounded-full bg-accent text-gray-950 text-xs sm:text-sm font-bold shadow-lg">
-                        <i class="fa-solid fa-sparkles mr-2"></i> ${data.badge}
+                        <i class="fa-solid ${data.badgeIcon} mr-2" aria-hidden="true"></i> ${data.badge}
                     </span>
                     
                 `;
-                heroTitle.textContent = data.title;
+                revealHeroTitle(data.title);
                 heroDesc.textContent = data.desc;
                 
                 if (data.bullets) {
@@ -2303,6 +2551,7 @@
                 }
 
                 heroImg.src = data.img;
+                heroImg.alt = data.caption;
                 heroImgCaption.textContent = data.caption;
                 
                 heroCta1Text.textContent = data.cta1Text;
@@ -2326,6 +2575,7 @@
             showSlide(currentSlideIndex);
         }
 
+        
         function nextSlide() {
             currentSlideIndex = (currentSlideIndex + 1) % slides.length;
             showSlide(currentSlideIndex);
