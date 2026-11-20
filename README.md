@@ -5,18 +5,6 @@ Corporate website for **Trinethra Global Healthcare Technology Solutions Pvt Ltd
 
 A single static page (`index.html`) with no build step. Open it in a browser or host it on any static host (GitHub Pages, Netlify, S3, etc.).
 
-## Logo
-
-Three leaves growing from one root: one for each of our commitments (clinical accuracy, financial clarity, compliance). The wordmark is set in Plus Jakarta Sans ExtraBold and the tagline in Inter SemiBold, both converted to shapes, so the files look the same everywhere without fonts installed.
-
-| File | Use |
-| --- | --- |
-| `assets/logo/trinethra-logo.svg` | Main logo for white or light backgrounds |
-| `assets/logo/trinethra-logo-white.svg` | For the primary green or other dark backgrounds |
-| `assets/logo/trinethra-logo-stacked.svg` | Mark above the name, for documents and square layouts |
-| `assets/logo/trinethra-mark.svg` | Leaves only, for small spaces |
-| `assets/logo/trinethra-icon.svg` | App icon, favicon and social profile picture |
-
 ## Brand colors
 
 | Role | Hex | Used for |
