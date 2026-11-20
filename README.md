@@ -5,6 +5,16 @@ Corporate website for **Trinethra Global Healthcare Technology Solutions Pvt Ltd
 
 A single static page (`index.html`) with no build step. Open it in a browser or host it on any static host (GitHub Pages, Netlify, S3, etc.).
 
+## Brand colors
+
+| Role | Hex | Used for |
+| --- | --- | --- |
+| Primary | `#275716` | Headings, dark sections, buttons, footer (Tailwind `navy-*` scale) |
+| Secondary | `#7AC44B` | Highlights, icons, primary call-to-action (Tailwind `brand-*` scale) |
+| Tertiary | `#FF8C00` | Small accents such as the logo's third eye (Tailwind `saffron-*` scale) |
+
+The color scales are defined once, in the `tailwind.config` block at the top of `index.html`.
+
 ## Before going live
 
 All contact details are set in one place: the `SITE` object near the bottom of `index.html`.
