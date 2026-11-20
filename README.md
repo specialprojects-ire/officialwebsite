@@ -10,8 +10,8 @@ A single static page (`index.html`) with no build step. Open it in a browser or 
 | Role | Hex | Used for |
 | --- | --- | --- |
 | Primary | `#275716` | Headings, dark sections, buttons, footer (Tailwind `navy-*` scale) |
-| Secondary | `#7AC44B` | Highlights, icons, primary call-to-action (Tailwind `brand-*` scale) |
-| Tertiary | `#FF8C00` | Small accents such as the logo's third eye (Tailwind `saffron-*` scale) |
+| Secondary | `#FF8C00` | Highlights, icons, primary call-to-action, logo eye (Tailwind `brand-*` scale) |
+| Tertiary | `#7AC44B` | Small accents such as the logo's third-eye dot (Tailwind `saffron-*` scale) |
 
 The color scales are defined once, in the `tailwind.config` block at the top of `index.html`.
 
