@@ -9,7 +9,7 @@ A single static page (`index.html`) with no build step. Open it in a browser or 
 
 | Role | Hex | Used for |
 | --- | --- | --- |
-| Primary | `#275716` | Headings, dark sections, buttons, footer (Tailwind `navy-*` scale) |
+| Primary | `#3F752B` | Headings, dark sections, buttons, footer (Tailwind `navy-*` scale) |
 | Secondary | `#FF8C00` | Highlights, icons, primary call-to-action, logo eye (Tailwind `brand-*` scale) |
 | Tertiary | `#7AC44B` | Small accents such as the logo's third-eye dot (Tailwind `saffron-*` scale) |
 
