@@ -5,13 +5,27 @@ Corporate website for **Trinethra Global Healthcare Technology Solutions Pvt Ltd
 
 A single static page (`index.html`) with no build step. Open it in a browser or host it on any static host (GitHub Pages, Netlify, S3, etc.).
 
+## Logo
+
+Three leaves in a dark-green square (light green, white and orange) with the "trinethra" wordmark: block-style "t"s and a square "i" dot, an orange tilted "e", and the tagline "GLOBAL HEALTHCARE TECHNOLOGY SOLUTIONS". Text is converted to outlines, so the files look the same everywhere.
+
+| File | Use |
+| --- | --- |
+| `assets/logo/trinethra-logo.svg` | Main logo, for white or light backgrounds (site header) |
+| `assets/logo/trinethra-logo-reversed.svg` | For dark backgrounds (site footer) |
+| `assets/logo/trinethra-icon.svg` | Leaf square only: favicon, app icon, social profile picture |
+| `assets/logo/trinethra-icon-512.png` / `apple-touch-icon.png` | PNG icons for browsers and phones |
+| `assets/logo/trinethra-social.png` | 1200×630 preview image for links shared on social media |
+
+Use ® only once the trademark is registered; until then use ™.
+
 ## Brand colors
 
 | Role | Hex | Used for |
 | --- | --- | --- |
 | Primary | `#3F752B` | Headings, dark sections, buttons, footer (Tailwind `navy-*` scale) |
-| Secondary | `#FF8C00` | Highlights, icons, primary call-to-action, logo eye (Tailwind `brand-*` scale) |
-| Tertiary | `#7AC44B` | Small accents such as the logo's third-eye dot (Tailwind `saffron-*` scale) |
+| Secondary | `#FF8C00` | Highlights, icons, primary call-to-action (Tailwind `brand-*` scale) |
+| Tertiary | `#7AC44B` | Small accents (Tailwind `saffron-*` scale) |
 
 The color scales are defined once, in the `tailwind.config` block at the top of `index.html`.
 
@@ -26,6 +40,7 @@ All contact details are set in one place: the `SITE` object near the bottom of `
 | `phone` | empty (hidden) | Add a number to show it |
 | `address` | `India` | Add the full registered office address |
 | `social.*` | empty (hidden) | Add LinkedIn / X / YouTube URLs to show the icons |
+| `leadership` | empty | Add real people (name, role, bio, LinkedIn) to replace the leadership-area cards with profile cards |
 
 Also review these items:
 
@@ -36,4 +51,8 @@ Also review these items:
 
 ## Sections
 
-Hero · Commitments · About · Services · Who we serve · Technology · Global delivery · Quality & people · Security & compliance · Engagement process · Free tools (7 calculators) · Careers · Contact · Footer
+Hero · Commitments · About (with corporate overview) · Services (7) · Who we serve · Technology · Software development process · Global delivery · Quality & people · Security & compliance · Leadership & advisory board · Engagement process · Free tools (7 calculators) · Case studies & news room · Careers · Contact · Footer
+
+Navigation keeps the original site's menus: **Company** (Who We Are, Corporate Overview, Global Delivery Model, Trust & Quality, Leadership Team, News Room), **Solutions**, **Technology**, **Tools** (all 7 calculators) and **Connect** (Careers, Contact, Case Studies & Insights).
+
+The news room and case studies contain example content. Replace them with real announcements and client stories (with permission) before launch.
