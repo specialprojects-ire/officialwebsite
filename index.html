@@ -50,10 +50,9 @@
         h1, h2, h3, .font-display { letter-spacing: -0.02em; }
 
         /* Desktop dropdown: opens on hover and on keyboard focus */
-        .nav-dropdown { opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .2s ease, transform .2s ease, visibility .2s; }
+        .nav-dropdown { position: absolute; left: 50%; top: calc(100% - 6px); max-width: calc(100vw - 32px); opacity: 0; visibility: hidden; transform: translate(-50%, 6px); transition: opacity .2s ease, transform .2s ease, visibility .2s; }
         .nav-group:hover .nav-dropdown,
-        .nav-group:focus-within .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
-        .nav-group::after { content: ''; position: absolute; left: 0; right: 0; top: 100%; height: 14px; }
+        .nav-group:focus-within .nav-dropdown { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
 
         .nav-link { position: relative; }
         .nav-link::after { content: ''; position: absolute; left: 0; bottom: -6px; height: 2px; width: 0; background: #D97400; transition: width .25s ease; }
@@ -92,7 +91,7 @@
     <!-- ============ HEADER ============ -->
     <header id="site-header" class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/70 transition-shadow">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-[72px]">
+            <div class="relative flex items-center justify-between h-[72px]">
                 <!-- Logo -->
                 <a href="#top" class="flex items-center gap-3 shrink-0" aria-label="Trinethra home">
                     <svg class="w-10 h-10" viewBox="0 0 40 40" aria-hidden="true">
@@ -103,52 +102,42 @@
                     </svg>
                     <span class="flex flex-col leading-none">
                         <span class="font-display text-[22px] font-extrabold tracking-tight text-navy-900">Trinethra</span>
-                        <span class="hidden sm:block text-[10px] font-semibold uppercase tracking-[0.16em] text-brand-700 mt-1">Global Healthcare Technology Solutions</span>
+                        <span class="hidden sm:block lg:hidden xl:block text-[10px] font-semibold uppercase tracking-[0.16em] text-brand-700 mt-1">Global Healthcare Technology Solutions</span>
                     </span>
                 </a>
 
                 <!-- Desktop navigation -->
-                <nav class="hidden lg:flex items-center gap-8 text-[15px] font-medium text-slate-700" aria-label="Primary">
-                    <a href="#about" class="nav-link hover:text-navy-900">About</a>
-
-                    <div class="relative nav-group">
-                        <button class="nav-link flex items-center gap-1.5 hover:text-navy-900" aria-haspopup="true">
-                            Services <i class="fa-solid fa-chevron-down text-[10px] mt-0.5" aria-hidden="true"></i>
-                        </button>
-                        <div class="nav-dropdown absolute left-1/2 -translate-x-1/2 top-[calc(100%+14px)] w-[640px] bg-white rounded-2xl shadow-2xl shadow-navy-900/10 border border-slate-200 p-3">
-                            <div class="grid grid-cols-2 gap-1">
-                                <a href="#svc-coding" class="flex gap-3 p-3 rounded-xl hover:bg-slate-50">
-                                    <span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-file-medical"></i></span>
-                                    <span><span class="block text-sm font-semibold text-navy-900">Medical Coding</span><span class="block text-xs text-slate-500 mt-0.5">AI-assisted inpatient, outpatient &amp; pro-fee</span></span>
-                                </a>
-                                <a href="#svc-rcm" class="flex gap-3 p-3 rounded-xl hover:bg-slate-50">
-                                    <span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-arrows-spin"></i></span>
-                                    <span><span class="block text-sm font-semibold text-navy-900">Revenue Cycle Management</span><span class="block text-xs text-slate-500 mt-0.5">Eligibility to final collection</span></span>
-                                </a>
-                                <a href="#svc-risk" class="flex gap-3 p-3 rounded-xl hover:bg-slate-50">
-                                    <span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-scale-balanced"></i></span>
-                                    <span><span class="block text-sm font-semibold text-navy-900">Risk Adjustment &amp; HCC</span><span class="block text-xs text-slate-500 mt-0.5">Retrospective &amp; prospective reviews</span></span>
-                                </a>
-                                <a href="#svc-cdi" class="flex gap-3 p-3 rounded-xl hover:bg-slate-50">
-                                    <span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-notes-medical"></i></span>
-                                    <span><span class="block text-sm font-semibold text-navy-900">Clinical Documentation Integrity</span><span class="block text-xs text-slate-500 mt-0.5">Compliant queries, accurate severity</span></span>
-                                </a>
-                                <a href="#svc-audit" class="flex gap-3 p-3 rounded-xl hover:bg-slate-50">
-                                    <span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-clipboard-check"></i></span>
-                                    <span><span class="block text-sm font-semibold text-navy-900">Coding Audit &amp; Compliance</span><span class="block text-xs text-slate-500 mt-0.5">Pre-bill, post-bill &amp; E/M audits</span></span>
-                                </a>
-                                <a href="#svc-engineering" class="flex gap-3 p-3 rounded-xl hover:bg-slate-50">
-                                    <span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-code"></i></span>
-                                    <span><span class="block text-sm font-semibold text-navy-900">Healthcare Software &amp; AI</span><span class="block text-xs text-slate-500 mt-0.5">Products, integrations &amp; automation</span></span>
-                                </a>
-                            </div>
+                <nav class="hidden lg:flex self-stretch items-stretch gap-5 xl:gap-7 text-[15px] font-medium text-slate-700" aria-label="Primary">
+                    <div class="nav-group flex items-center">
+                        <button class="nav-link flex items-center gap-1.5 hover:text-navy-900" aria-haspopup="true">Company <i class="fa-solid fa-chevron-down text-[10px] mt-0.5" aria-hidden="true"></i></button>
+                        <div class="nav-dropdown w-[940px] bg-white rounded-2xl shadow-2xl shadow-navy-900/10 border border-slate-200 p-4">
+                            <div class="grid gap-4" style="grid-template-columns: repeat(4, minmax(0, 1fr))"><div><h3 class="px-2.5 pb-2 mb-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">About Us</h3><div class="space-y-0.5"><a href="#about" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-users" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">Who We Are</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">Our story, mission and vision</span></span></a><a href="#overview" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-building" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">Corporate Overview</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">Trinethra at a glance</span></span></a></div></div><div><h3 class="px-2.5 pb-2 mb-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">Trust &amp; Delivery</h3><div class="space-y-0.5"><a href="#delivery" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-earth-asia" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">Global Delivery Model</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">24/7 US–India operational coverage</span></span></a><a href="#quality" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-award" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">Trust &amp; Quality</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">AAPC &amp; AHIMA-credentialed teams</span></span></a></div></div><div><h3 class="px-2.5 pb-2 mb-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">Leadership &amp; News</h3><div class="space-y-0.5"><a href="#leadership" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-user-tie" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">Leadership Team</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">The people guiding Trinethra</span></span></a><a href="#news" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-newspaper" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">News Room</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">Announcements &amp; insights</span></span></a></div></div><div class="rounded-2xl bg-slate-50 border border-slate-200 p-5 flex flex-col"><span class="self-start text-[10px] font-bold uppercase tracking-wider text-brand-700 bg-brand-50 px-2 py-1 rounded">Company Spotlight</span><h4 class="mt-3 text-sm font-bold text-navy-900">Three lenses, one standard</h4><p class="mt-1.5 text-xs text-slate-600 leading-relaxed flex-1">Trinethra means “three eyes”: every engagement is reviewed for clinical accuracy, financial clarity and compliance.</p><a href="#about" class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-brand-700 hover:text-navy-900">Explore our story <i class="fa-solid fa-arrow-right text-[10px]" aria-hidden="true"></i></a></div></div>
                         </div>
                     </div>
-
-                    <a href="#technology" class="nav-link hover:text-navy-900">Technology</a>
-                    <a href="#delivery" class="nav-link hover:text-navy-900">Delivery</a>
-                    <a href="#tools" class="nav-link hover:text-navy-900">Tools</a>
-                    <a href="#careers" class="nav-link hover:text-navy-900">Careers</a>
+                    <div class="nav-group flex items-center">
+                        <button class="nav-link flex items-center gap-1.5 hover:text-navy-900" aria-haspopup="true">Solutions <i class="fa-solid fa-chevron-down text-[10px] mt-0.5" aria-hidden="true"></i></button>
+                        <div class="nav-dropdown w-[940px] bg-white rounded-2xl shadow-2xl shadow-navy-900/10 border border-slate-200 p-4">
+                            <div class="grid gap-4" style="grid-template-columns: repeat(4, minmax(0, 1fr))"><div><h3 class="px-2.5 pb-2 mb-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">Coding &amp; Revenue Cycle</h3><div class="space-y-0.5"><a href="#svc-coding" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-brain" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">AI-Enabled CAC Coding</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">Computer-assisted coding, validated by certified coders</span></span></a><a href="#svc-rcm" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-arrows-spin" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">Revenue Cycle Management</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">End-to-end, from eligibility to collection</span></span></a></div></div><div><h3 class="px-2.5 pb-2 mb-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">Billing &amp; Documentation</h3><div class="space-y-0.5"><a href="#svc-billing" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-file-invoice-dollar" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">Medical Billing &amp; Coding</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">Practice billing that cuts denials and speeds cash flow</span></span></a><a href="#svc-cdi" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-notes-medical" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">Clinical Documentation (CDI)</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">Compliant queries and accurate case mix</span></span></a></div></div><div><h3 class="px-2.5 pb-2 mb-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">Risk, Audit &amp; Engineering</h3><div class="space-y-0.5"><a href="#svc-risk" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">Risk Adjustment &amp; HCC</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">Defensible HCC capture and RADV readiness</span></span></a><a href="#svc-audit" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">Coding Audit &amp; Compliance</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">Pre-bill, post-bill and E/M audits</span></span></a><a href="#svc-engineering" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-code" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">Healthcare Software &amp; AI</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">Products, integrations and automation</span></span></a></div></div><div class="rounded-2xl bg-slate-50 border border-slate-200 p-5 flex flex-col"><span class="self-start text-[10px] font-bold uppercase tracking-wider text-brand-700 bg-brand-50 px-2 py-1 rounded">Solutions Spotlight</span><h4 class="mt-3 text-sm font-bold text-navy-900">Full-suite revenue integrity</h4><p class="mt-1.5 text-xs text-slate-600 leading-relaxed flex-1">Engage us for a single service or a fully managed revenue cycle, all on one quality and security framework.</p><a href="#services" class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-brand-700 hover:text-navy-900">Explore all solutions <i class="fa-solid fa-arrow-right text-[10px]" aria-hidden="true"></i></a></div></div>
+                        </div>
+                    </div>
+                    <div class="nav-group flex items-center">
+                        <button class="nav-link flex items-center gap-1.5 hover:text-navy-900" aria-haspopup="true">Technology <i class="fa-solid fa-chevron-down text-[10px] mt-0.5" aria-hidden="true"></i></button>
+                        <div class="nav-dropdown w-[940px] bg-white rounded-2xl shadow-2xl shadow-navy-900/10 border border-slate-200 p-4">
+                            <div class="grid gap-4" style="grid-template-columns: repeat(4, minmax(0, 1fr))"><div><h3 class="px-2.5 pb-2 mb-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">AI Workflow</h3><div class="space-y-0.5"><a href="#technology" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-microchip" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">AI &amp; Technology Process</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">Ingestion, clinical NLP and expert validation</span></span></a></div></div><div><h3 class="px-2.5 pb-2 mb-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">Engineering</h3><div class="space-y-0.5"><a href="#software-process" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-code-branch" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">Software Development</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">Agile sprints, QA and secure CI/CD</span></span></a></div></div><div><h3 class="px-2.5 pb-2 mb-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">Security</h3><div class="space-y-0.5"><a href="#compliance" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">Compliance &amp; Security</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">HIPAA, DPDP and ISO 27001-aligned controls</span></span></a></div></div><div class="rounded-2xl bg-slate-50 border border-slate-200 p-5 flex flex-col"><span class="self-start text-[10px] font-bold uppercase tracking-wider text-brand-700 bg-brand-50 px-2 py-1 rounded">Technology Spotlight</span><h4 class="mt-3 text-sm font-bold text-navy-900">Secure by design</h4><p class="mt-1.5 text-xs text-slate-600 leading-relaxed flex-1">Encryption everywhere, least-privilege access and no PHI stored on local workstations.</p><a href="#compliance" class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-brand-700 hover:text-navy-900">Explore our security <i class="fa-solid fa-arrow-right text-[10px]" aria-hidden="true"></i></a></div></div>
+                        </div>
+                    </div>
+                    <div class="nav-group flex items-center">
+                        <button class="nav-link flex items-center gap-1.5 hover:text-navy-900" aria-haspopup="true">Tools <i class="fa-solid fa-chevron-down text-[10px] mt-0.5" aria-hidden="true"></i></button>
+                        <div class="nav-dropdown w-[760px] bg-white rounded-2xl shadow-2xl shadow-navy-900/10 border border-slate-200 p-4">
+                            <div class="grid gap-4" style="grid-template-columns: repeat(3, minmax(0, 1fr))"><div><h3 class="px-2.5 pb-2 mb-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">Risk &amp; Coding Tools</h3><div class="space-y-0.5"><a href="#tools" onclick="switchTool('raf')" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-calculator" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">Medicare HCC RAF Calculator</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">Estimate a risk adjustment score</span></span></a><a href="#tools" onclick="switchTool('em')" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-chart-column" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">E/M Utilization Benchmarking</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">Compare visit levels to a benchmark</span></span></a><a href="#tools" onclick="switchTool('icd')" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">ICD-10 → HCC Lookup</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">Map diagnosis codes to HCCs</span></span></a></div></div><div><h3 class="px-2.5 pb-2 mb-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">Revenue &amp; Recovery Tools</h3><div class="space-y-0.5"><a href="#tools" onclick="switchTool('denial')" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">Claim Denial Impact Calculator</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">Revenue at risk and recoverable</span></span></a><a href="#tools" onclick="switchTool('cdi')" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-file-waveform" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">CDI Query ROI Estimator</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">Effect of CMI on inpatient revenue</span></span></a><a href="#tools" onclick="switchTool('rcm')" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-piggy-bank" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">RCM Outsourcing Savings</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">In-house cost vs. outsourcing</span></span></a><a href="#tools" onclick="switchTool('ar')" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">AR Days &amp; Cash Flow</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">Working capital released</span></span></a></div></div><div class="rounded-2xl bg-slate-50 border border-slate-200 p-5 flex flex-col"><span class="self-start text-[10px] font-bold uppercase tracking-wider text-brand-700 bg-brand-50 px-2 py-1 rounded">Free Tools</span><h4 class="mt-3 text-sm font-bold text-navy-900">Interactive RCM &amp; risk calculators</h4><p class="mt-1.5 text-xs text-slate-600 leading-relaxed flex-1">Seven quick calculators for coding, risk adjustment and revenue cycle leaders.</p><a href="#tools" class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-brand-700 hover:text-navy-900">Launch the tools <i class="fa-solid fa-arrow-right text-[10px]" aria-hidden="true"></i></a></div></div>
+                        </div>
+                    </div>
+                    <div class="nav-group flex items-center">
+                        <button class="nav-link flex items-center gap-1.5 hover:text-navy-900" aria-haspopup="true">Connect <i class="fa-solid fa-chevron-down text-[10px] mt-0.5" aria-hidden="true"></i></button>
+                        <div class="nav-dropdown w-[560px] bg-white rounded-2xl shadow-2xl shadow-navy-900/10 border border-slate-200 p-4">
+                            <div class="grid gap-4" style="grid-template-columns: repeat(2, minmax(0, 1fr))"><div><h3 class="px-2.5 pb-2 mb-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">Get in Touch</h3><div class="space-y-0.5"><a href="#careers" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-briefcase" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">Careers</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">Join our growing team</span></span></a><a href="#contact" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-envelope" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">Contact Us</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">Talk to our specialists</span></span></a><a href="#case-studies" class="flex gap-3 p-2.5 rounded-xl hover:bg-slate-50"><span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i></span><span><span class="block text-sm font-semibold text-navy-900">Case Studies &amp; Insights</span><span class="block text-xs text-slate-500 mt-0.5 leading-snug">How we help healthcare organizations</span></span></a></div></div><div class="rounded-2xl bg-slate-50 border border-slate-200 p-5 flex flex-col"><span class="self-start text-[10px] font-bold uppercase tracking-wider text-brand-700 bg-brand-50 px-2 py-1 rounded">Consultation</span><h4 class="mt-3 text-sm font-bold text-navy-900">Talk to an expert</h4><p class="mt-1.5 text-xs text-slate-600 leading-relaxed flex-1">Review your coding and billing workflows with a Trinethra specialist.</p><a href="#contact" class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-brand-700 hover:text-navy-900">Schedule a consultation <i class="fa-solid fa-arrow-right text-[10px]" aria-hidden="true"></i></a></div></div>
+                        </div>
+                    </div>
                 </nav>
 
                 <div class="hidden lg:flex items-center gap-3">
@@ -166,14 +155,27 @@
 
         <!-- Mobile menu -->
         <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white">
-            <nav class="max-w-7xl mx-auto px-4 sm:px-6 py-4 space-y-1 text-[15px] font-medium text-slate-700" aria-label="Mobile">
-                <a href="#about" class="block px-3 py-2.5 rounded-lg hover:bg-slate-50">About</a>
-                <a href="#services" class="block px-3 py-2.5 rounded-lg hover:bg-slate-50">Services</a>
-                <a href="#technology" class="block px-3 py-2.5 rounded-lg hover:bg-slate-50">Technology</a>
-                <a href="#delivery" class="block px-3 py-2.5 rounded-lg hover:bg-slate-50">Delivery model</a>
-                <a href="#compliance" class="block px-3 py-2.5 rounded-lg hover:bg-slate-50">Security &amp; compliance</a>
-                <a href="#tools" class="block px-3 py-2.5 rounded-lg hover:bg-slate-50">Tools</a>
-                <a href="#careers" class="block px-3 py-2.5 rounded-lg hover:bg-slate-50">Careers</a>
+            <nav class="max-w-7xl mx-auto px-4 sm:px-6 py-3 text-[15px] font-medium text-slate-700 max-h-[75vh] overflow-y-auto" aria-label="Mobile">
+                <div class="py-2 border-b border-slate-100">
+                    <p class="px-3 pt-1 pb-1 text-[11px] font-bold uppercase tracking-wider text-slate-400">Company</p>
+                    <a href="#about" class="block px-3 py-2 rounded-lg hover:bg-slate-50">Who We Are</a><a href="#overview" class="block px-3 py-2 rounded-lg hover:bg-slate-50">Corporate Overview</a><a href="#delivery" class="block px-3 py-2 rounded-lg hover:bg-slate-50">Global Delivery Model</a><a href="#quality" class="block px-3 py-2 rounded-lg hover:bg-slate-50">Trust &amp; Quality</a><a href="#leadership" class="block px-3 py-2 rounded-lg hover:bg-slate-50">Leadership Team</a><a href="#news" class="block px-3 py-2 rounded-lg hover:bg-slate-50">News Room</a>
+                </div>
+                <div class="py-2 border-b border-slate-100">
+                    <p class="px-3 pt-1 pb-1 text-[11px] font-bold uppercase tracking-wider text-slate-400">Solutions</p>
+                    <a href="#svc-coding" class="block px-3 py-2 rounded-lg hover:bg-slate-50">AI-Enabled CAC Coding</a><a href="#svc-rcm" class="block px-3 py-2 rounded-lg hover:bg-slate-50">Revenue Cycle Management</a><a href="#svc-billing" class="block px-3 py-2 rounded-lg hover:bg-slate-50">Medical Billing &amp; Coding</a><a href="#svc-cdi" class="block px-3 py-2 rounded-lg hover:bg-slate-50">Clinical Documentation (CDI)</a><a href="#svc-risk" class="block px-3 py-2 rounded-lg hover:bg-slate-50">Risk Adjustment &amp; HCC</a><a href="#svc-audit" class="block px-3 py-2 rounded-lg hover:bg-slate-50">Coding Audit &amp; Compliance</a><a href="#svc-engineering" class="block px-3 py-2 rounded-lg hover:bg-slate-50">Healthcare Software &amp; AI</a>
+                </div>
+                <div class="py-2 border-b border-slate-100">
+                    <p class="px-3 pt-1 pb-1 text-[11px] font-bold uppercase tracking-wider text-slate-400">Technology</p>
+                    <a href="#technology" class="block px-3 py-2 rounded-lg hover:bg-slate-50">AI &amp; Technology Process</a><a href="#software-process" class="block px-3 py-2 rounded-lg hover:bg-slate-50">Software Development</a><a href="#compliance" class="block px-3 py-2 rounded-lg hover:bg-slate-50">Compliance &amp; Security</a>
+                </div>
+                <div class="py-2 border-b border-slate-100">
+                    <p class="px-3 pt-1 pb-1 text-[11px] font-bold uppercase tracking-wider text-slate-400">Tools</p>
+                    <a href="#tools" onclick="switchTool('raf')" class="block px-3 py-2 rounded-lg hover:bg-slate-50">Medicare HCC RAF Calculator</a><a href="#tools" onclick="switchTool('em')" class="block px-3 py-2 rounded-lg hover:bg-slate-50">E/M Utilization Benchmarking</a><a href="#tools" onclick="switchTool('icd')" class="block px-3 py-2 rounded-lg hover:bg-slate-50">ICD-10 → HCC Lookup</a><a href="#tools" onclick="switchTool('denial')" class="block px-3 py-2 rounded-lg hover:bg-slate-50">Claim Denial Impact Calculator</a><a href="#tools" onclick="switchTool('cdi')" class="block px-3 py-2 rounded-lg hover:bg-slate-50">CDI Query ROI Estimator</a><a href="#tools" onclick="switchTool('rcm')" class="block px-3 py-2 rounded-lg hover:bg-slate-50">RCM Outsourcing Savings</a><a href="#tools" onclick="switchTool('ar')" class="block px-3 py-2 rounded-lg hover:bg-slate-50">AR Days &amp; Cash Flow</a>
+                </div>
+                <div class="py-2 border-b border-slate-100">
+                    <p class="px-3 pt-1 pb-1 text-[11px] font-bold uppercase tracking-wider text-slate-400">Connect</p>
+                    <a href="#careers" class="block px-3 py-2 rounded-lg hover:bg-slate-50">Careers</a><a href="#contact" class="block px-3 py-2 rounded-lg hover:bg-slate-50">Contact Us</a><a href="#case-studies" class="block px-3 py-2 rounded-lg hover:bg-slate-50">Case Studies &amp; Insights</a>
+                </div>
                 <a href="#contact" class="block mt-3 text-center px-4 py-3 rounded-xl bg-navy-900 text-white font-semibold">Talk to an expert</a>
             </nav>
         </div>
@@ -336,6 +338,29 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Corporate overview -->
+            <div id="overview" class="mt-16 scroll-mt-28 reveal">
+                <h3 class="font-display text-2xl font-bold text-navy-900">Corporate overview</h3>
+                <dl class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-px rounded-2xl overflow-hidden border border-slate-200 bg-slate-200">
+                    <div class="bg-white p-6">
+                        <dt class="text-xs font-semibold uppercase tracking-wider text-slate-500">Legal name</dt>
+                        <dd class="mt-2 font-semibold text-navy-900 leading-snug">Trinethra Global Healthcare Technology Solutions Pvt Ltd</dd>
+                    </div>
+                    <div class="bg-white p-6">
+                        <dt class="text-xs font-semibold uppercase tracking-wider text-slate-500">Headquarters</dt>
+                        <dd class="mt-2 font-semibold text-navy-900 leading-snug" data-address></dd>
+                    </div>
+                    <div class="bg-white p-6">
+                        <dt class="text-xs font-semibold uppercase tracking-wider text-slate-500">What we do</dt>
+                        <dd class="mt-2 font-semibold text-navy-900 leading-snug">Medical coding, revenue cycle management, CDI, risk adjustment and healthcare software</dd>
+                    </div>
+                    <div class="bg-white p-6">
+                        <dt class="text-xs font-semibold uppercase tracking-wider text-slate-500">Who we serve</dt>
+                        <dd class="mt-2 font-semibold text-navy-900 leading-snug">Hospitals, physician groups, health plans, billing and health-tech companies worldwide</dd>
+                    </div>
+                </dl>
+            </div>
         </div>
     </section>
 
@@ -368,6 +393,17 @@
                         <li class="flex gap-2"><i class="fa-solid fa-check text-brand-600 mt-1 text-xs" aria-hidden="true"></i> Eligibility, benefits &amp; prior authorization</li>
                         <li class="flex gap-2"><i class="fa-solid fa-check text-brand-600 mt-1 text-xs" aria-hidden="true"></i> Charge entry, claim scrubbing &amp; submission</li>
                         <li class="flex gap-2"><i class="fa-solid fa-check text-brand-600 mt-1 text-xs" aria-hidden="true"></i> Payment posting, AR follow-up &amp; denials</li>
+                    </ul>
+                </article>
+
+                <article id="svc-billing" class="reveal scroll-mt-28 group rounded-2xl bg-white border border-slate-200 p-7 hover:border-brand-300 hover:shadow-xl hover:shadow-navy-900/5 transition-all">
+                    <span class="w-12 h-12 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center text-xl"><i class="fa-solid fa-file-invoice-dollar" aria-hidden="true"></i></span>
+                    <h3 class="font-display mt-6 text-xl font-bold text-navy-900">Medical Billing &amp; Coding</h3>
+                    <p class="mt-3 text-[15px] leading-relaxed text-slate-600">Billing and coding for physician practices and specialty groups, run by certified specialists to reduce denials and speed up cash flow.</p>
+                    <ul class="mt-5 space-y-2 text-sm text-slate-600">
+                        <li class="flex gap-2"><i class="fa-solid fa-check text-brand-600 mt-1 text-xs" aria-hidden="true"></i> Charge capture &amp; specialty-specific coding</li>
+                        <li class="flex gap-2"><i class="fa-solid fa-check text-brand-600 mt-1 text-xs" aria-hidden="true"></i> Clean-claim submission &amp; rejection fixes</li>
+                        <li class="flex gap-2"><i class="fa-solid fa-check text-brand-600 mt-1 text-xs" aria-hidden="true"></i> Patient statements &amp; month-end reporting</li>
                     </ul>
                 </article>
 
@@ -404,11 +440,13 @@
                     </ul>
                 </article>
 
-                <article id="svc-engineering" class="reveal scroll-mt-28 group rounded-2xl bg-navy-900 text-white border border-navy-900 p-7 hover:shadow-xl hover:shadow-navy-900/20 transition-all">
+                <article id="svc-engineering" class="reveal scroll-mt-28 group md:col-span-2 lg:col-span-3 rounded-2xl bg-navy-900 text-white border border-navy-900 p-7 sm:p-9 hover:shadow-xl hover:shadow-navy-900/20 transition-all grid lg:grid-cols-2 gap-x-10 items-center">
+                    <div>
                     <span class="w-12 h-12 rounded-xl bg-white/10 text-brand-100 flex items-center justify-center text-xl"><i class="fa-solid fa-code" aria-hidden="true"></i></span>
                     <h3 class="font-display mt-6 text-xl font-bold">Healthcare Software &amp; AI Engineering</h3>
                     <p class="mt-3 text-[15px] leading-relaxed text-white/90">Product engineering for health-tech companies and providers, built secure and interoperable from day one.</p>
-                    <ul class="mt-5 space-y-2 text-sm text-white/90">
+                    </div>
+                    <ul class="mt-5 lg:mt-0 space-y-2 text-sm text-white/90">
                         <li class="flex gap-2"><i class="fa-solid fa-check text-brand-300 mt-1 text-xs" aria-hidden="true"></i> EHR integrations (HL7 v2, FHIR, X12 EDI)</li>
                         <li class="flex gap-2"><i class="fa-solid fa-check text-brand-300 mt-1 text-xs" aria-hidden="true"></i> Clinical NLP, analytics &amp; dashboards</li>
                         <li class="flex gap-2"><i class="fa-solid fa-check text-brand-300 mt-1 text-xs" aria-hidden="true"></i> Workflow automation &amp; RPA for RCM</li>
@@ -500,6 +538,39 @@
                 <span class="px-3 py-1.5 rounded-lg bg-navy-950/30 border border-white/10 text-xs font-medium text-white/90">Major EHR &amp; PM systems</span>
                 <span class="px-3 py-1.5 rounded-lg bg-navy-950/30 border border-white/10 text-xs font-medium text-white/90">Cloud-native &amp; CI/CD</span>
             </div>
+        </div>
+    </section>
+
+    <!-- ============ SOFTWARE DEVELOPMENT PROCESS ============ -->
+    <section id="software-process" class="py-20 lg:py-28 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl reveal">
+                <p class="text-sm font-semibold uppercase tracking-[0.14em] text-brand-700">Engineering excellence</p>
+                <h2 class="font-display mt-3 text-3xl sm:text-4xl font-extrabold text-navy-900 leading-tight">Software development process</h2>
+                <p class="mt-5 text-lg text-slate-600 leading-relaxed">We build healthcare software with agile delivery, secure coding practices and automated CI/CD pipelines, so every release is reliable, scalable and compliant.</p>
+            </div>
+            <ol class="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+                <li class="reveal rounded-2xl border border-slate-200 p-6">
+                    <span class="w-11 h-11 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center text-lg"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i></span>
+                    <h3 class="font-display mt-5 text-lg font-bold text-navy-900">1. Discovery &amp; design</h3>
+                    <p class="mt-2 text-sm text-slate-600 leading-relaxed">Requirements workshops, clinical workflow mapping and architecture planning with your stakeholders.</p>
+                </li>
+                <li class="reveal rounded-2xl border border-slate-200 p-6">
+                    <span class="w-11 h-11 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center text-lg"><i class="fa-solid fa-code" aria-hidden="true"></i></span>
+                    <h3 class="font-display mt-5 text-lg font-bold text-navy-900">2. Agile development</h3>
+                    <p class="mt-2 text-sm text-slate-600 leading-relaxed">Short sprints with regular demos, peer code reviews and HIPAA privacy checks built into every story.</p>
+                </li>
+                <li class="reveal rounded-2xl border border-slate-200 p-6">
+                    <span class="w-11 h-11 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center text-lg"><i class="fa-solid fa-vial-circle-check" aria-hidden="true"></i></span>
+                    <h3 class="font-display mt-5 text-lg font-bold text-navy-900">3. Quality &amp; security testing</h3>
+                    <p class="mt-2 text-sm text-slate-600 leading-relaxed">Automated regression tests, vulnerability scanning and clinical validation before anything ships.</p>
+                </li>
+                <li class="reveal rounded-2xl border border-slate-200 p-6">
+                    <span class="w-11 h-11 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center text-lg"><i class="fa-solid fa-rocket" aria-hidden="true"></i></span>
+                    <h3 class="font-display mt-5 text-lg font-bold text-navy-900">4. Deployment &amp; support</h3>
+                    <p class="mt-2 text-sm text-slate-600 leading-relaxed">Low-downtime releases, continuous monitoring and ongoing maintenance under agreed support levels.</p>
+                </li>
+            </ol>
         </div>
     </section>
 
@@ -633,8 +704,45 @@
         </div>
     </section>
 
+    <!-- ============ LEADERSHIP ============ -->
+    <section id="leadership" class="py-20 lg:py-28 bg-slate-50 border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl reveal">
+                <p class="text-sm font-semibold uppercase tracking-[0.14em] text-brand-700">Leadership</p>
+                <h2 class="font-display mt-3 text-3xl sm:text-4xl font-extrabold text-navy-900 leading-tight">Guided by healthcare and technology specialists</h2>
+                <p class="mt-5 text-lg text-slate-600 leading-relaxed">Our leadership brings together experience in clinical coding, revenue cycle operations, information security and software engineering, with advisors from the healthcare industry.</p>
+            </div>
+            <!-- Filled from SITE.leadership when names are added; otherwise the leadership areas below are shown -->
+            <div id="leadership-people" class="hidden mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+            <div id="leadership-areas" class="mt-14 grid md:grid-cols-3 gap-5">
+                <article class="reveal rounded-2xl bg-white border border-slate-200 p-7">
+                    <span class="w-12 h-12 rounded-xl bg-navy-900 text-brand-300 flex items-center justify-center text-lg"><i class="fa-solid fa-user-tie" aria-hidden="true"></i></span>
+                    <h3 class="font-display mt-5 text-lg font-bold text-navy-900">Executive leadership</h3>
+                    <p class="mt-2 text-sm text-slate-600 leading-relaxed">Sets strategy, owns client relationships and is accountable for delivery quality across every engagement.</p>
+                </article>
+                <article class="reveal rounded-2xl bg-white border border-slate-200 p-7">
+                    <span class="w-12 h-12 rounded-xl bg-navy-900 text-brand-300 flex items-center justify-center text-lg"><i class="fa-solid fa-stethoscope" aria-hidden="true"></i></span>
+                    <h3 class="font-display mt-5 text-lg font-bold text-navy-900">Clinical &amp; coding leadership</h3>
+                    <p class="mt-2 text-sm text-slate-600 leading-relaxed">Credentialed coding and CDI leaders who run training, quality audits and guideline updates.</p>
+                </article>
+                <article class="reveal rounded-2xl bg-white border border-slate-200 p-7">
+                    <span class="w-12 h-12 rounded-xl bg-navy-900 text-brand-300 flex items-center justify-center text-lg"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
+                    <h3 class="font-display mt-5 text-lg font-bold text-navy-900">Technology &amp; compliance leadership</h3>
+                    <p class="mt-2 text-sm text-slate-600 leading-relaxed">Leads our AI, software engineering and information-security programs, including HIPAA and ISO 27001 controls.</p>
+                </article>
+            </div>
+            <div class="mt-8 rounded-2xl bg-white border border-slate-200 p-7 sm:p-8 grid md:grid-cols-3 gap-6 items-center reveal">
+                <div class="md:col-span-2">
+                    <h3 class="font-display text-lg font-bold text-navy-900">Advisory board</h3>
+                    <p class="mt-2 text-sm text-slate-600 leading-relaxed">Healthcare executives and clinical leaders advise us on physician adoption of AI-assisted documentation, denial prevention and data governance.</p>
+                </div>
+                <a href="#contact" class="md:justify-self-end inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-navy-900 text-white text-sm font-semibold hover:bg-navy-800">Meet our team <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </section>
+
     <!-- ============ ENGAGEMENT PROCESS ============ -->
-    <section id="process" class="py-20 lg:py-24 bg-slate-50 border-y border-slate-200">
+    <section id="process" class="py-20 lg:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto reveal">
                 <p class="text-sm font-semibold uppercase tracking-[0.14em] text-brand-700">How we engage</p>
@@ -666,7 +774,7 @@
     </section>
 
     <!-- ============ TOOLS ============ -->
-    <section id="tools" class="py-20 lg:py-28 bg-white">
+    <section id="tools" class="py-20 lg:py-28 bg-white border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-3xl reveal">
                 <p class="text-sm font-semibold uppercase tracking-[0.14em] text-brand-700">Free tools</p>
@@ -931,6 +1039,58 @@
         </div>
     </section>
 
+    <!-- ============ CASE STUDIES & INSIGHTS ============ -->
+    <section id="case-studies" class="py-20 lg:py-28 bg-white border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl reveal">
+                <p class="text-sm font-semibold uppercase tracking-[0.14em] text-brand-700">Case studies &amp; insights</p>
+                <h2 class="font-display mt-3 text-3xl sm:text-4xl font-extrabold text-navy-900 leading-tight">How we help healthcare organizations</h2>
+                <p class="mt-5 text-lg text-slate-600 leading-relaxed">Typical engagements and practical thinking from our coding, revenue cycle and technology teams.</p>
+            </div>
+
+            <div class="mt-14 grid lg:grid-cols-12 gap-6">
+                <div class="lg:col-span-7 grid sm:grid-cols-2 gap-5">
+                    <article class="reveal rounded-2xl bg-white border border-slate-200 p-7 flex flex-col">
+                        <span class="self-start text-[11px] font-bold uppercase tracking-wider text-brand-700 bg-brand-50 px-2 py-1 rounded">Typical engagement</span>
+                        <h3 class="font-display mt-4 text-lg font-bold text-navy-900">Clearing a hospital coding backlog</h3>
+                        <p class="mt-2 text-sm text-slate-600 leading-relaxed flex-1">AI-assisted coding plus an overnight team works through unbilled inpatient charts, while dual-tier QA keeps accuracy on target.</p>
+                        <a href="#contact" class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:text-navy-900">Discuss a similar project <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i></a>
+                    </article>
+                    <article class="reveal rounded-2xl bg-white border border-slate-200 p-7 flex flex-col">
+                        <span class="self-start text-[11px] font-bold uppercase tracking-wider text-brand-700 bg-brand-50 px-2 py-1 rounded">Typical engagement</span>
+                        <h3 class="font-display mt-4 text-lg font-bold text-navy-900">Cutting denials for a physician group</h3>
+                        <p class="mt-2 text-sm text-slate-600 leading-relaxed flex-1">Front-end eligibility checks, payer-specific claim edits and root-cause reporting stop repeat denials at the source.</p>
+                        <a href="#contact" class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:text-navy-900">Discuss a similar project <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i></a>
+                    </article>
+                </div>
+
+                <div id="news" class="lg:col-span-5 scroll-mt-28 rounded-2xl bg-white border border-slate-200 p-7 reveal">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-display text-lg font-bold text-navy-900">News room</h3>
+                        <i class="fa-solid fa-newspaper text-brand-600" aria-hidden="true"></i>
+                    </div>
+                    <ul class="mt-5 divide-y divide-slate-100">
+                        <li class="py-4 first:pt-0">
+                            <p class="text-[11px] font-bold uppercase tracking-wider text-saffron-600">Announcement</p>
+                            <p class="mt-1 font-semibold text-navy-900">Trinethra launches its official website</p>
+                            <p class="mt-1 text-sm text-slate-600">An introduction to our services, delivery model and free revenue cycle tools.</p>
+                        </li>
+                        <li class="py-4">
+                            <p class="text-[11px] font-bold uppercase tracking-wider text-brand-700">Insight</p>
+                            <p class="mt-1 font-semibold text-navy-900">Human-in-the-loop AI: why every code still needs a certified coder</p>
+                            <p class="mt-1 text-sm text-slate-600">How we combine clinical NLP with expert validation for accurate, auditable coding.</p>
+                        </li>
+                        <li class="py-4 last:pb-0">
+                            <p class="text-[11px] font-bold uppercase tracking-wider text-brand-700">Insight</p>
+                            <p class="mt-1 font-semibold text-navy-900">Front-end eligibility checks: the cheapest denial prevention</p>
+                            <p class="mt-1 text-sm text-slate-600">Why most avoidable denials start before the patient is even seen.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ============ CAREERS ============ -->
     <section id="careers" class="py-20 lg:py-28 bg-slate-50 border-y border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1092,6 +1252,7 @@
                     <ul class="mt-4 space-y-2.5 text-sm">
                         <li><a href="#svc-coding" class="hover:text-white">Medical coding</a></li>
                         <li><a href="#svc-rcm" class="hover:text-white">Revenue cycle management</a></li>
+                        <li><a href="#svc-billing" class="hover:text-white">Medical billing &amp; coding</a></li>
                         <li><a href="#svc-risk" class="hover:text-white">Risk adjustment &amp; HCC</a></li>
                         <li><a href="#svc-cdi" class="hover:text-white">Clinical documentation integrity</a></li>
                         <li><a href="#svc-audit" class="hover:text-white">Coding audit &amp; compliance</a></li>
@@ -1102,9 +1263,13 @@
                     <h3 class="text-sm font-semibold text-white">Company</h3>
                     <ul class="mt-4 space-y-2.5 text-sm">
                         <li><a href="#about" class="hover:text-white">About us</a></li>
+                        <li><a href="#leadership" class="hover:text-white">Leadership</a></li>
                         <li><a href="#technology" class="hover:text-white">Technology</a></li>
+                        <li><a href="#software-process" class="hover:text-white">Software development</a></li>
                         <li><a href="#delivery" class="hover:text-white">Delivery model</a></li>
                         <li><a href="#compliance" class="hover:text-white">Security</a></li>
+                        <li><a href="#case-studies" class="hover:text-white">Case studies</a></li>
+                        <li><a href="#news" class="hover:text-white">News room</a></li>
                         <li><a href="#careers" class="hover:text-white">Careers</a></li>
                     </ul>
                 </div>
@@ -1174,6 +1339,9 @@
                 x: '',
                 youtube: '',
             },
+            // Leadership team: add real people to show their cards in the Leadership section, e.g.
+            // { name: 'Full Name', role: 'Managing Director', bio: 'One line about their background.', linkedin: 'https://www.linkedin.com/in/...' }
+            leadership: [],
         };
 
         // ---------- Populate contact details ----------
@@ -1188,6 +1356,34 @@
         });
         if (!SITE.phone) document.querySelectorAll('[data-config-row="phone"]').forEach(el => el.remove());
         document.querySelectorAll('[data-address]').forEach(el => { el.textContent = SITE.address; });
+
+        // Leadership cards (only when names are provided)
+        if (SITE.leadership.length) {
+            const wrap = document.getElementById('leadership-people');
+            SITE.leadership.forEach(person => {
+                const card = document.createElement('article');
+                card.className = 'rounded-2xl bg-white border border-slate-200 p-7';
+                const initials = person.name.split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase();
+                card.innerHTML = `<span class="w-14 h-14 rounded-2xl bg-navy-900 text-white font-display font-bold text-lg flex items-center justify-center"></span>
+                    <h3 class="font-display mt-5 text-lg font-bold text-navy-900"></h3>
+                    <p class="text-sm font-semibold text-brand-700"></p>
+                    <p class="mt-2 text-sm text-slate-600 leading-relaxed"></p>`;
+                card.children[0].textContent = initials;
+                card.children[1].textContent = person.name;
+                card.children[2].textContent = person.role || '';
+                card.children[3].textContent = person.bio || '';
+                if (person.linkedin) {
+                    const a = document.createElement('a');
+                    a.href = person.linkedin; a.target = '_blank'; a.rel = 'noopener';
+                    a.className = 'mt-4 inline-flex items-center gap-2 text-sm font-semibold text-navy-900 hover:text-brand-700';
+                    a.innerHTML = '<i class="fa-brands fa-linkedin" aria-hidden="true"></i> LinkedIn';
+                    card.appendChild(a);
+                }
+                wrap.appendChild(card);
+            });
+            wrap.classList.remove('hidden');
+            document.getElementById('leadership-areas').classList.add('hidden');
+        }
 
         const socialIcons = { linkedin: 'fa-linkedin-in', x: 'fa-x-twitter', youtube: 'fa-youtube' };
         const socialLabels = { linkedin: 'LinkedIn', x: 'X', youtube: 'YouTube' };

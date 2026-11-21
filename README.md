@@ -26,6 +26,7 @@ All contact details are set in one place: the `SITE` object near the bottom of `
 | `phone` | empty (hidden) | Add a number to show it |
 | `address` | `India` | Add the full registered office address |
 | `social.*` | empty (hidden) | Add LinkedIn / X / YouTube URLs to show the icons |
+| `leadership` | empty | Add real people (name, role, bio, LinkedIn) to replace the leadership-area cards with profile cards |
 
 Also review these items:
 
@@ -36,4 +37,8 @@ Also review these items:
 
 ## Sections
 
-Hero · Commitments · About · Services · Who we serve · Technology · Global delivery · Quality & people · Security & compliance · Engagement process · Free tools (7 calculators) · Careers · Contact · Footer
+Hero · Commitments · About (with corporate overview) · Services (7) · Who we serve · Technology · Software development process · Global delivery · Quality & people · Security & compliance · Leadership & advisory board · Engagement process · Free tools (7 calculators) · Case studies & news room · Careers · Contact · Footer
+
+Navigation keeps the original site's menus: **Company** (Who We Are, Corporate Overview, Global Delivery Model, Trust & Quality, Leadership Team, News Room), **Solutions**, **Technology**, **Tools** (all 7 calculators) and **Connect** (Careers, Contact, Case Studies & Insights).
+
+The news room and case studies contain example content. Replace them with real announcements and client stories (with permission) before launch.
